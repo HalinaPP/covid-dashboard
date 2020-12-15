@@ -1,4 +1,4 @@
-import { countReducer } from "./countReducer.js";
+import { countReducer } from './countReducer.js';
 
 const combineReducers = reducers => {
 	const reducerKeys = Object.keys(reducers);

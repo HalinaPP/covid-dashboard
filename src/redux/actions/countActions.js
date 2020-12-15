@@ -1,7 +1,7 @@
 import {
 	INCREMENT,
 	DECREMENT
-} from "./types";
+} from './types';
 
 export function incrementCount() {
 	return {
@@ -22,15 +22,3 @@ function incrementAsync() {
 		}, 1000);
 	};
 }
-
-// WITH SOME DATA
-
-//  export function someAction(data) {
-// 	return {
-// 	  type: TYPE,
-// 	  payload: data
-// 	};
-//  }
-
-
-

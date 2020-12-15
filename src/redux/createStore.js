@@ -1,5 +1,5 @@
 export const createStore = reducer => {
-	let state = reducer(initialState, { type: "__INIT__" });
+	let state = reducer(initialState, { type: '__INIT__' });
 	const subscribers = [];
 	return {
 		dispatch(action) {

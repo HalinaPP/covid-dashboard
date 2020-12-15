@@ -1,22 +1,3 @@
-// PLAY MODE
-export const CHANGE_MODE = "CHANGE_MODE";
-export const IS_PLAY_MODE = "IS_PLAY_MODE";
-
-// AUDIO ARRAY
-export const CLEAR_AUDIO_ARRAY = "CLEAR_AUDIO_ARRAY";
-export const SET_AUDIO_ARRAY = "SET_AUDIO_ARRAY";
-export const SHUFFLE_AUDIO_ARRAY = "SHUFFLE_AUDIO_ARRAY";
-export const ANSWER_AUDIO = "ANSWER_AUDIO";
-export const SET_REPEAT = "SET_REPEAT";
-export const DELETE_LAST_AUDIO = "DELETE_LAST_AUDIO";
-export const ADD_WRONG_ANSWER = "ADD_WRONG_ANSWER";
-
-// GAME STATE
-export const START_GAME = "START_GAME";
-export const END_GAME = "END_GAME";
-
-// URL
-export const SET_CARDS = "SET_CARDS";
-
-// MENU
-export const CHANGE_MENU_VISIBILITY = "CHANGE_MENU_VISIBILITY";
+//COUNT
+export const INCREMENT = "INCREMENT";
+export const DECREMENT = "DECREMENT";

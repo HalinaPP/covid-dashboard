@@ -15,21 +15,6 @@ export const createStore = reducer => {
 	};
 };
 
-
-
-export const applyMiddleware = (...middlewares) => {
-	return createStore => reducer => {
-		const store = createStore(reducer);
-		return {
-			...store,
-			dispatch: function dispatch(action) {
-				return middlewares(store)(store.dispatch)(action);
-			}
-		};
-	};
-};
-
-
 export function applyMiddleware(middleware) {
 	return function createStoreWithMiddleware(createStore) {
 		return (reducer) => {

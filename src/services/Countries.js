@@ -51,16 +51,11 @@ function generateCountryArr(data){
     }
 }
 
-let getCountryInfoCache = getAllCountyriesInfo();
-
-export async function getCountriesInfo(){
-    let countries = await getCountryInfoCache();
-    return countries;
-}
+export const getCountriesInfo = getAllCountyriesInfo();
 
 export async function getMapinfo(id){
     let state = store.getState();
-    let countries = await getCountryInfoCache();
+    let countries = await getCountriesInfo();
     console.log(id);
     console.log(countries);
     let countryObj = countries.find((obj) => obj.id === id);
@@ -69,13 +64,13 @@ export async function getMapinfo(id){
     }
     let periodObj ;
     let result;
-    console.log(state);
     if(state.country.period === ALL_PERIOD){
         periodObj = countryObj.allPeriod;
     }
     else if(state.country.period === LAST_DAY){
         periodObj = countryObj.lastDay;
     }
+
     let casesValue ;
     switch (state.country.casesType){
         case CASES:
@@ -90,6 +85,7 @@ export async function getMapinfo(id){
         default:
             break;
     }
+
     switch (state.country.valueType){
         case ABSOLUTE:
             result = casesValue;
@@ -100,6 +96,5 @@ export async function getMapinfo(id){
         default:
             break
     }
-
     return result;
 }

@@ -1,17 +1,20 @@
-import { loadMap, renderMapContainer } from '../Map/Map.render';
+import { loadMap } from '../Map/Map.render';
 import { createHtmlElement } from '../../helpers/utils';
+import { renderCountryTable } from '../CountryTable/CountryTable.render';
+import { renderChart } from '../Chart/Chart.render';
+import { renderCountriesList } from '../CountriesList/CountriesList.render';
 
 export const renderMainContent = () => {
     const mainEl = createHtmlElement('main', 'main');
-    document.body.append(mainEl);
-    /* const map = renderMapContainer();
-    console.log('main');
-    mainEl.appendChild(map);
-    console.log('main load'); */
+    document.body.appendChild(mainEl);
+
+    mainEl.appendChild(renderCountriesList());
     loadMap(mainEl);
-    /* mainEl.appendChild(map); */
-    // setTimeout(() => loadMap(), 2000);
-    console.log('main load2');
+
+    const rightCol = createHtmlElement('aside', 'right-col');
+    rightCol.appendChild(renderCountryTable());
+    rightCol.appendChild(renderChart());
+    mainEl.appendChild(rightCol);
 
     return mainEl;
 };

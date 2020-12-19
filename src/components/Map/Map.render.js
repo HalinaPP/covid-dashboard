@@ -19,7 +19,7 @@ const mapOptions = {
     preferCanvas: true,
     zoomSnap: 0,
     doubleClickZoom: false,
-    minZoom: 1.5
+    minZoom: 0
 };
 
 const getMapOptions = () => {
@@ -29,13 +29,12 @@ const getMapOptions = () => {
 export const renderMapContainer = (mainEl) => {
     const mapEl = createHtmlElement('div');
     mapEl.setAttribute('id', MAP_DIV_ID);
-    console.log('map render');
     mainEl.appendChild(mapEl);
     return mapEl;
 };
 
 const renderWorldMap = (mapEl) => {
-    return new L.Map(mapEl,getMapOptions()).setView([40, 0], 2);
+    return new L.Map(mapEl, getMapOptions()).setView([40, 0], 2);
 };
 
 const renderCountriesPoligonLayer = () => {

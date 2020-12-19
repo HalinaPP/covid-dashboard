@@ -11,12 +11,12 @@ const RECOVERY_COLOR = 'green';
 const CASES_COLOR = 'red';
 
 const IMAGES = {
-    rsLogo: './assets/images/icons/rs_school_js.svg'
+    rsLogo: './assets/icons/rs_school_js.svg'
 };
 
 const FOOTER_COPYRIGHT_DEVELOPERS = `<a href='https://github.com/HalinaPP'>
                             @halinapp
-                          </a>,
+                          </a>,<a href='https://github.com/Arcuman'>@arcuman</a>
                           <span>2020</span>`;
 const FOOTER_COPYRIGHT_RSSCHOOL = `<a href='https://rs.school/js/'>
                                         <img src="${IMAGES.rsLogo}" alt="RS SCHOOL">

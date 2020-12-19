@@ -8,6 +8,15 @@
   }
 }
 
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 body, html {
   height: 100%;
   padding: 0;
@@ -17,6 +26,20 @@ html {
   font-family: sans-serif;
 }
 
+footer{
+  text-align: center;
+  span{
+    margin-right:30px;
+  }
+  img{
+    width:70px;
+  }
+}
+
+.main{
+  width: 900px;
+  height: 580px
+}
 #map{
   width: 900px;
   height: 580px

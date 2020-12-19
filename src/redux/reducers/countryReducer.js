@@ -3,12 +3,15 @@ import {
     CHANGE_PERIOD,
     CHANGE_VALUE_TYPE
 } from '../types';
+import { CHANGE_CASES_TYPE } from '@/redux/types';
+import { ABSOLUTE, ALL_PERIOD } from '@/services/filterTypes';
+import { CASES } from '@/constants/constants';
 
 const initialState = {
-    activeCountry: null,
-    period: null,
-    valueType: null,
-    countryInfo: {}
+    activeCountry: 'Belarus',
+    period: ALL_PERIOD,
+    valueType: ABSOLUTE,
+    casesType: CASES,
 };
 
 export function countryReducer(state = initialState, action) {
@@ -27,6 +30,11 @@ export function countryReducer(state = initialState, action) {
             return {
                 ...state,
                 valueType: action.payload
+            };
+        case CHANGE_CASES_TYPE:
+            return {
+                ...state,
+                casesType: action.payload
             };
         default:
             return state;

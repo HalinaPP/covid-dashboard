@@ -3,6 +3,7 @@ import {
     CHANGE_PERIOD,
     CHANGE_VALUE_TYPE
 } from '../types';
+import { CHANGE_CASES_TYPE } from '@/redux/types';
 
 const changeCountry = (countryName) => {
     return {
@@ -24,5 +25,11 @@ const changeValueType = (valueType) => {
         payload: valueType
     };
 }
+const changeCasesType = (casesType) => {
+    return {
+        type: CHANGE_CASES_TYPE,
+        payload: casesType
+    };
+}
 
-export default { changeCountry, changePeriod, changeValueType };
+export default { changeCountry, changePeriod, changeValueType,changeCasesType };

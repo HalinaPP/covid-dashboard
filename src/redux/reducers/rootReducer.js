@@ -1,4 +1,4 @@
-import { countReducer } from './countReducer.js';
+import { countryReducer } from '@/redux/reducers/countryReducer';
 
 const combineReducers = reducers => {
 	const reducerKeys = Object.keys(reducers);
@@ -13,5 +13,5 @@ const combineReducers = reducers => {
 };
 
 export const rootReducer = combineReducers({
-	count: countReducer
+	country: countryReducer
 });

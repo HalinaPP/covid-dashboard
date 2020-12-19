@@ -1,5 +1,6 @@
-import { createStore, applyMiddleware } from './createStore'
-import appReducer from './reducers'
+import { createStore, applyMiddleware, connect } from './createStore';
+import { rootReducer } from '@/redux/reducers/rootReducer';
+import countryActions from '@/redux/actions/countryActions';
 
 const thunk = (store) => (dispatch) => (action) => {
 	if (typeof action === 'function') {
@@ -8,4 +9,6 @@ const thunk = (store) => (dispatch) => (action) => {
 	return dispatch(action);
 };
 
-export const store = applyMiddleware(thunk, createStore, appReducer)
+export const store = applyMiddleware(thunk, createStore, rootReducer)
+
+export const connectedCountryActions = connect(countryActions, store.dispatch);

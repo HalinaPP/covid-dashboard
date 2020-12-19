@@ -3,6 +3,7 @@ import { createHtmlElement } from '../../helpers/utils';
 
 export const renderMainContent = () => {
     const mainEl = createHtmlElement('main', 'main');
+    document.body.append(mainEl);
     /* const map = renderMapContainer();
     console.log('main');
     mainEl.appendChild(map);

@@ -35,7 +35,7 @@ export const renderMapContainer = (mainEl) => {
 };
 
 const renderWorldMap = (mapEl) => {
-    return new L.Map(mapEl, getMapOptions()).setView([40, 0], 2);
+    return new L.Map(mapEl,getMapOptions()).setView([40, 0], 2);
 };
 
 const renderCountriesPoligonLayer = () => {

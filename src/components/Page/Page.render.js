@@ -3,5 +3,7 @@ import { renderFooter } from '../Footer/Footer.render';
 import { renderMainContent } from '../Main/Main.render';
 
 export const renderPage = () => {
-    document.body.append(renderHeader(), renderMainContent(), renderFooter());
+    document.body.append(renderHeader());
+    renderMainContent();
+    document.body.append(renderFooter());
 };

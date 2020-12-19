@@ -1,4 +1,5 @@
-import { LAST_DAY, ALL_PERIOD, ABSOLUTE, RELATIVE } from './filterTypes'
+import { LAST_DAY, ALL_PERIOD, ABSOLUTE, RELATIVE } from './filterTypes';
+import countriesMap from '@/services/countries.json';
 
 function getDate(dateObj){
     let dateArr =  Object.keys(dateObj);
@@ -74,7 +75,6 @@ async function createDataObject(responseData, valueType){
  * @returns { object } covid info
  */
 export async function getTableInfo(country, period, valueType){
-
     let response;
     let resultQuery;
     let responseData;
@@ -95,4 +95,15 @@ export async function getTableInfo(country, period, valueType){
     resultQuery = await createDataObject(responseData,valueType);
     return resultQuery;
 }
+
+export async function getFlagsCountry(){
+    let flagAndCountry = []
+    let response = await fetch('https://restcountries.eu/rest/v2/all?fields=alpha3Code;name;population;flag');
+    let dataFlags = await response.json();
+    countriesMap.features.forEach((country) =>{
+        flagAndCountry.push(dataFlags.find((flagInfo)=> flagInfo.alpha3Code === country.id))
+    })
+    return flagAndCountry;
+}
+
 

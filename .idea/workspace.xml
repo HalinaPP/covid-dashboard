@@ -23,7 +23,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/services/Countries.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/Countries.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/filterTypes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/filterTypes.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,7 +60,8 @@
       <option name="presentableId" value="Default" />
       <updated>1608046007226</updated>
       <workItem from="1608046008811" duration="7523000" />
-      <workItem from="1608314294815" duration="12577000" />
+      <workItem from="1608314294815" duration="13101000" />
+      <workItem from="1608387046711" duration="4594000" />
     </task>
     <servers />
   </component>

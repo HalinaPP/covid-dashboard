@@ -1,4 +1,4 @@
-import { getTableInfo } from '@/services/Countries';
+import { getTableInfo, getFlagsCountry } from '@/services/Countries';
 import { LAST_DAY, ALL_PERIOD,ABSOLUTE ,RELATIVE } from '@/services/filterTypes'
 
 (async () =>{
@@ -18,5 +18,16 @@ import { LAST_DAY, ALL_PERIOD,ABSOLUTE ,RELATIVE } from '@/services/filterTypes'
     console.log(countryData6);
     console.log(countryData7);
     console.log(countryData8);
+
+    let flags = await getFlagsCountry();
+    console.log(flags);
+    let map1 = await getFlagsCountry(LAST_DAY,ABSOLUTE);
+    let map2 = await getFlagsCountry(LAST_DAY,RELATIVE);
+    let map3 = await getFlagsCountry(ALL_PERIOD,ABSOLUTE);
+    let map4 = await getFlagsCountry(ALL_PERIOD,RELATIVE);
+    console.log(map1);
+    console.log(map2);
+    console.log(map3);
+    console.log(map4);
 })()
 

@@ -52,6 +52,7 @@
     "chart.js": "^2.9.4",
     "del-cli": "^3.0.1",
     "eslint-config-prettier": "^6.15.0",
+    "leaflet": "^1.7.1",
     "normalize.css": "^8.0.1",
     "prettier": "^2.1.2"
   }

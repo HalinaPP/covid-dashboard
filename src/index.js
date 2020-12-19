@@ -1,5 +1,4 @@
 import './styles/styles.scss';
-import { loadMap } from './components/Map/Map.render';
+import { renderPage } from './components/Page/Page.render';
 
-window.addEventListener('DOMContentLoaded', loadMap());
-
+window.addEventListener('DOMContentLoaded', renderPage());

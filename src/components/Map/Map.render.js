@@ -19,18 +19,22 @@ const mapOptions = {
     preferCanvas: true,
     zoomSnap: 0,
     doubleClickZoom: false,
-    minZoom: 1.5
+    minZoom: 0
 };
 
 const getMapOptions = () => {
     return mapOptions;
 };
 
-const renderMapContainer = () => {
+export const renderMapContainer = (mainEl) => {
     const mapEl = createHtmlElement('div');
-    mapEl.setAttribute('id', 'map');
-    document.body.appendChild(mapEl);
-    return new L.Map(MAP_DIV_ID, getMapOptions()).setView([40, 0], 2);
+    mapEl.setAttribute('id', MAP_DIV_ID);
+    mainEl.appendChild(mapEl);
+    return mapEl;
+};
+
+const renderWorldMap = (mapEl) => {
+    return new L.Map(mapEl, getMapOptions()).setView([40, 0], 2);
 };
 
 const renderCountriesPoligonLayer = () => {
@@ -57,8 +61,11 @@ const renderLegendToMap = () => {
     return L.control.attribution(attrOptions);
 };
 
-export const loadMap = () => {
-    const map = renderMapContainer();
+export const loadMap = (mainEl) => {
+    console.log('map load');
+    const mapEl = renderMapContainer(mainEl);
+
+    const map = renderWorldMap(mapEl);
     map.addLayer(renderWorldMapLayer());
     renderCountriesPoligonLayer().addTo(map);
     renderScaleControl().addTo(map);

@@ -1,5 +1,4 @@
 import { LAST_DAY, ALL_PERIOD, ABSOLUTE, RELATIVE } from './filterTypes';
-import countriesMap from '@/services/countries.json';
 
 function getDate(dateObj){
     let dateArr =  Object.keys(dateObj);
@@ -31,7 +30,10 @@ function countNumberOf(cases, valueType, population)
 
 async function createDataObject(responseData, valueType){
 
-    let population = 7594000000;
+    let response =  await fetch ('https://disease.sh/v3/covid-19/all');
+    let populationData = await response.json();
+    let population = populationData.population;
+    console.log(population);
     let resultObj = {
         country: 'all',
         cases: 0,
@@ -40,7 +42,7 @@ async function createDataObject(responseData, valueType){
         date: 'all'
     };
     if(responseData.country) {
-        let response = await fetch(`https://restcountries.eu/rest/v2/name/${responseData.country}`);
+        response = await fetch(`https://restcountries.eu/rest/v2/name/${responseData.country}`);
         let dataResp = await response.json();
         console.log(dataResp[0].population);
         population = dataResp[0].population;
@@ -96,14 +98,36 @@ export async function getTableInfo(country, period, valueType){
     return resultQuery;
 }
 
-export async function getFlagsCountry(){
-    let flagAndCountry = []
-    let response = await fetch('https://restcountries.eu/rest/v2/all?fields=alpha3Code;name;population;flag');
+export async function getFlagsCountry(country){
+    let response = await fetch(`https://restcountries.eu/rest/v2/alpha/${country}?fields=alpha3Code;name;population;flag`);
     let dataFlags = await response.json();
-    countriesMap.features.forEach((country) =>{
-        flagAndCountry.push(dataFlags.find((flagInfo)=> flagInfo.alpha3Code === country.id))
-    })
-    return flagAndCountry;
+    return dataFlags;
 }
+
+// how to use
+// import { getTableInfo, getFlagsCountry } from '@/services/Countries';
+// import { LAST_DAY, ALL_PERIOD,ABSOLUTE ,RELATIVE } from '@/services/filterTypes'
+//
+// (async () =>{
+//     let countryData1 = await getTableInfo('all', LAST_DAY,ABSOLUTE);
+//     let countryData2 = await getTableInfo('all', LAST_DAY,RELATIVE);
+//     let countryData3 = await getTableInfo('all', ALL_PERIOD,ABSOLUTE);
+//     let countryData4 = await getTableInfo('all', ALL_PERIOD,RELATIVE);
+//     let countryData5 = await getTableInfo('belarus',ALL_PERIOD,ABSOLUTE);
+//     let countryData6 = await getTableInfo('belarus',ALL_PERIOD,RELATIVE);
+//     let countryData7 = await getTableInfo('belarus',LAST_DAY,ABSOLUTE);
+//     let countryData8 = await getTableInfo('belarus',LAST_DAY,RELATIVE);
+//     console.log(countryData1);
+//     console.log(countryData2);
+//     console.log(countryData3);
+//     console.log(countryData4);
+//     console.log(countryData5);
+//     console.log(countryData6);
+//     console.log(countryData7);
+//     console.log(countryData8);
+//
+//     let flags = await getFlagsCountry('BLR');
+//     console.log(flags);
+// })()
 
 

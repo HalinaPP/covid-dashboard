@@ -1,3 +1,4 @@
+const TITLE = 'Covid-19 dashbord';
 const MAP_DIV_ID = 'map';
 const WORLD_MAP_URL =
     'https://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}';
@@ -9,6 +10,19 @@ const DEATHS_COLOR = 'black';
 const RECOVERY_COLOR = 'green';
 const CASES_COLOR = 'red';
 
+const IMAGES = {
+    rsLogo: './assets/icons/rs_school_js.svg'
+};
+
+const FOOTER_COPYRIGHT_DEVELOPERS = `<a href='https://github.com/HalinaPP'>
+                            @halinapp
+                          </a>,<a href='https://github.com/Arcuman'>@arcuman</a>
+                          <span>2020</span>`;
+const FOOTER_COPYRIGHT_RSSCHOOL = `<a href='https://rs.school/js/'>
+                                        <img src="${IMAGES.rsLogo}" alt="RS SCHOOL">
+                                        RS SCHOOL
+                                    </a>`;
+
 export {
     MAP_CENTER,
     DEATHS,
@@ -18,5 +32,8 @@ export {
     RECOVERY_COLOR,
     CASES_COLOR,
     WORLD_MAP_URL,
-    MAP_DIV_ID
+    MAP_DIV_ID,
+    TITLE,
+    FOOTER_COPYRIGHT_DEVELOPERS,
+    FOOTER_COPYRIGHT_RSSCHOOL
 };

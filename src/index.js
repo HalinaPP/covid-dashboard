@@ -1,5 +1,5 @@
 import './styles/styles.scss';
-import { loadMap } from './components/Map/Map.render';
+import { renderPage } from './components/Page/Page.render';
 import { getMapinfo, getCountriesInfo } from '@/services/Countries';
 import { connectedCountryActions } from '@/redux/store';
 import { LAST_DAY, RELATIVE } from '@/services/filterTypes';
@@ -17,6 +17,4 @@ import { DEATHS } from '@/constants/constants';
     console.log(blr);
 })()
 
-
-window.addEventListener('DOMContentLoaded', loadMap());
-
+window.addEventListener('DOMContentLoaded', renderPage());

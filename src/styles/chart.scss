@@ -1,0 +1,19 @@
+.chart-wrapper{
+  @include flex(column);
+}
+.chart--container {
+  background: yellow;
+  height: auto;
+  width: 100%;
+}
+
+.chart--info{
+  background: yellow;
+  display: block;
+  height: 30px;
+  width: 100%;
+}
+
+.zc-ref {
+  display: none;
+}

@@ -54,6 +54,7 @@
     "eslint-config-prettier": "^6.15.0",
     "leaflet": "^1.7.1",
     "normalize.css": "^8.0.1",
-    "prettier": "^2.1.2"
+    "prettier": "^2.1.2",
+    "zingchart": "^2.9.2"
   }
 }

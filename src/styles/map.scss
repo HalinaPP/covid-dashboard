@@ -1,7 +1,9 @@
 
 #map{
     width: 60%;
-    height: 80vh
+    height: 80vh;
+    @include border;
+    @include shadow;
   }
   .map-box, .legend {
     padding: 6px 8px;

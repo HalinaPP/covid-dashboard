@@ -10,7 +10,7 @@ function generateCountryObj(country){
             id: null
         };
     }
-    let countryObj = {
+    const countryObj = {
         id: country.countryInfo.iso3,
         name: country.country,
         flag: country.countryInfo.flag,
@@ -30,9 +30,9 @@ function generateCountryObj(country){
 }
 
 function generateCountryArr(data){
-    let countryArr = [];
+    const countryArr = [];
     countriesData.countries.forEach((countryAbbr)=>{
-        let dataCountry = data.find((country) => country.countryInfo.iso3 === countryAbbr.id);
+        const dataCountry = data.find((country) => country.countryInfo.iso3 === countryAbbr.id);
         countryArr.push(generateCountryObj(dataCountry));
     })
     return countryArr;
@@ -44,8 +44,8 @@ function generateCountryArr(data){
         if(cachedInfo){
             return cachedInfo;
         }
-        let response = await fetch('https://disease.sh/v3/covid-19/countries?yesterday=1');
-        let coundtryData = await response.json();
+        const response = await fetch('https://disease.sh/v3/covid-19/countries?yesterday=1');
+        const coundtryData = await response.json();
         cachedInfo = await generateCountryArr(coundtryData);
         return cachedInfo;
     }
@@ -55,10 +55,10 @@ export const getCountriesInfo = getAllCountyriesInfo();
 
 export async function getMapinfo(id){
     let state = store.getState();
-    let countries = await getCountriesInfo();
+    const countries = await getCountriesInfo();
     console.log(id);
     console.log(countries);
-    let countryObj = countries.find((obj) => obj.id === id);
+    const countryObj = countries.find((obj) => obj.id === id);
     if(countryObj.id === null){
         return -1;
     }

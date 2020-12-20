@@ -1,2 +1,4 @@
-export const INCREMENT = 'INCREMENT';
-export const DECREMENT = 'DECREMENT';
+export const CHANGE_COUNTRY = 'CHANGE_COUNTRY';
+export const CHANGE_PERIOD = 'CHANGE_PERIOD';
+export const CHANGE_VALUE_TYPE = 'CHANGE_VALUE_TYPE';
+export const CHANGE_CASES_TYPE = 'CHANGE_CASES_TYPE';

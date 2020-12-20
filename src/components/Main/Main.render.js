@@ -12,9 +12,9 @@ export const renderMainContent = () => {
     loadMap(mainEl);
 
     const rightCol = createHtmlElement('aside', 'right-col');
-    rightCol.appendChild(renderCountryTable());
-    rightCol.appendChild(renderChart());
     mainEl.appendChild(rightCol);
+    rightCol.appendChild(renderCountryTable());
+    renderChart(rightCol);
 
     return mainEl;
 };

@@ -83,7 +83,14 @@ const jsloader = () => {
     ];
 
     if (isDev) {
-        loaders.push('eslint-loader');
+        const eslint = {
+            loader: 'eslint-loader',
+            options: {
+                configFile: '.eslintrc',
+                fix: true
+            }
+        };
+        loaders.push(eslint);
     }
     return loaders;
 };
@@ -168,9 +175,5 @@ module.exports = {
                 use: jsloader()
             }
         ]
-    },
-    eslint: {
-        configFile: '.eslintrc',
-        fix: true
     }
 };

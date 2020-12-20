@@ -54,7 +54,7 @@ function generateCountryArr(data){
 export const getCountriesInfo = getAllCountyriesInfo();
 
 export async function getMapinfo(id){
-    let state = store.getState();
+    const state = store.getState();
     const countries = await getCountriesInfo();
     console.log(id);
     console.log(countries);

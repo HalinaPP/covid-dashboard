@@ -7,7 +7,7 @@ import { DEATHS } from '@/constants/constants';
 
 
 (async () => {
-    let res = await getCountriesInfo();
+    const res = await getCountriesInfo();
     let blr = await getMapinfo('BLR');
     console.log(res);
     console.log(blr);

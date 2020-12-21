@@ -16,7 +16,7 @@ export async function getChartInfo() {
     const result = {
         casesType: null,
         casesCount: 0,
-        timeLine: 0,
+        timeLine: 0
     };
     const countries = await getCountriesInfo();
     const countryName = state.country.activeCountry;
@@ -26,7 +26,7 @@ export async function getChartInfo() {
     const population = countryPop.population;
     const response = await fetch(GET_COUNTRY_HISTORY_URL_BY_NAME(countryName));
     const responseData = await response.json();
-
+    console.log(state.country.casesType);
     switch (state.country.casesType) {
         case CASES:
             result.casesType = CASES;
@@ -46,7 +46,7 @@ export async function getChartInfo() {
 
     const periodArray = {
         timeLine: null,
-        casesCount: null,
+        casesCount: null
     };
 
     if (state.country.period === ALL_PERIOD) {
@@ -88,16 +88,16 @@ export const setChartData = async () => {
                     text: jsonData.casesType,
                     values: jsonData.casesCount,
                     backgroundColor: '#003849',
-                    scales: 'scale-x,scale-y',
-                },
+                    scales: 'scale-x,scale-y'
+                }
             ],
             scaleY: {
                 items: jsonData.casesCount,
-                'min-value': 0,
+                'min-value': 0
             },
             scaleX: {
-                labels: jsonData.timeLine,
-            },
-        },
+                labels: jsonData.timeLine
+            }
+        }
     });
 };

@@ -1,7 +1,28 @@
-.countriy-data-table{
+.country-data-table{
   @include border;
   @include shadow;
-  @include flex(column);
+  @include flex(column, flex-start);
+  row-gap:2rem;
+
   height: 250px;
   margin: 10px;
+
+  &-header{
+    @include flex();
+    column-gap: 1rem;
+    font-weight:bold;
+      border-bottom: 0.1rem solid black
+      div{
+        width:30%
+      }
+
+  }
+  &-data{
+    @include flex();
+    column-gap: 1rem;
+    div{
+      width:30%
+    }
+  }
 }
+

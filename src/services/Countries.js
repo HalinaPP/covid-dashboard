@@ -1,7 +1,6 @@
 import { LAST_DAY, ALL_PERIOD, ABSOLUTE, RELATIVE } from './filterTypes';
 import countriesData from '@/data/countries.json';
 import { store } from '@/redux/store';
-import { CASES, DEATHS, RECOVERY } from '@/constants/constants';
 import { GET_ALL_COUNTRIES_URL, GET_WORLD_URL } from '@/services/constant';
 
 function generateCountryObj(country) {
@@ -47,9 +46,10 @@ function getAllCountyriesInfo() {
         const responseCountries = await fetch(GET_ALL_COUNTRIES_URL);
         const coundtryData = await responseCountries.json();
         cachedInfo = await generateCountryArr(coundtryData);
+
         const responseWorld = await fetch(GET_WORLD_URL);
         const worldData = await responseWorld.json();
-        console.log(worldData);
+
         const worldObj = await generateCountryObj(worldData);
         cachedInfo.push(worldObj);
         return cachedInfo;
@@ -71,36 +71,33 @@ export async function getMapinfo(id) {
     }
     let periodObj;
     let result;
-    console.log(state.country.period);
+
     if (state.country.period === ALL_PERIOD) {
         periodObj = countryObj.allPeriod;
     } else if (state.country.period === LAST_DAY) {
         periodObj = countryObj.lastDay;
     }
-    let casesValue;
-    switch (state.country.casesType) {
-        case CASES:
-            casesValue = periodObj.cases;
-            break;
-        case DEATHS:
-            casesValue = periodObj.deaths;
-            break;
-        case RECOVERY:
-            casesValue = periodObj.recovered;
-            break;
-        default:
-            break;
-    }
+    const casesValue = {
+        cases: periodObj.cases,
+        deaths: periodObj.deaths,
+        recovered: periodObj.recovered
+    };
 
-    switch (state.country.valueType) {
-        case ABSOLUTE:
-            result = casesValue;
-            break;
-        case RELATIVE:
-            result = Math.round(casesValue / (countryObj.population / 100000));
-            break;
-        default:
-            break;
-    }
-    return result;
+    const casesValueAmount = Object.entries(casesValue).map((item) => {
+        const value = item[1];
+        switch (state.country.valueType) {
+            case ABSOLUTE:
+                result = value;
+                break;
+            case RELATIVE:
+                result = Math.round(value / (countryObj.population / 100000));
+                break;
+            default:
+                break;
+        }
+        return [item[0], result];
+    });
+
+    const casesValueAmountObj = Object.fromEntries(casesValueAmount);
+    return { countryName: countryObj.name, casesValueAmount: casesValueAmountObj };
 }

@@ -6,7 +6,7 @@ import {
     secondColor,
 } from '@/components/Chart/constants';
 import { store } from '@/redux/store';
-import { CASES, DEATHS, RECOVERY } from '@/constants/constants';
+import { CASES, DEATHS, RECOVERY } from '@/constants/map';
 import { ABSOLUTE, ALL_PERIOD, LAST_DAY, RELATIVE } from '@/services/filterTypes';
 import { getCountriesInfo } from '@/services/Countries';
 import { createHtmlElement } from '@/helpers/utils';

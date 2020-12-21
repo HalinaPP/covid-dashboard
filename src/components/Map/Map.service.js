@@ -7,7 +7,8 @@ import {
     AMOUNT_PERIOD,
     AMOUNT_PERIOD_DEATH,
     COLORS_MAP,
-    COLORS_MAP_BORDER
+    COLORS_MAP_BORDER,
+    COUNTRY_HOVER_STYLE
 } from '@/constants/map';
 
 import L from 'leaflet';
@@ -20,10 +21,6 @@ function handleClick() {
   setCurrCountry(country, event);
   */
 }
-
-const highlightStyle = {
-    fillOpacity: 0.2
-};
 
 const getDataType = () => {
     const state = store.getState();
@@ -104,7 +101,7 @@ const mouseOverFeature = (event) => {
     const feature = event.target;
     createPopup(feature);
 
-    feature.setStyle(highlightStyle);
+    feature.setStyle(COUNTRY_HOVER_STYLE);
     if (!L.Browser.ie && !L.Browser.opera) {
         feature.bringToFront();
     }

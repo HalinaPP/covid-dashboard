@@ -24,10 +24,31 @@ const COLORS_MAP_BORDER = {
     recovered: '#00772C',
     deaths: '#111111'
 };
+const COUNTRY_HOVER_STYLE = {
+    fillOpacity: 0.2
+};
 const MAP_DIV_ID = 'map';
 const WORLD_MAP_URL =
     'https://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}';
 const MAP_CENTER = [17.385044, 78.486671];
+
+const MAP_LAYER_OPTIONS = {
+    attribution: '',
+    maxZoom: 16,
+    continuousWorld: false,
+    noWrap: true
+};
+
+const MAP_OPTIONS = {
+    center: MAP_CENTER,
+    zoom: 2,
+    worldCopyJump: true,
+    preferCanvas: true,
+    zoomSnap: 0,
+    doubleClickZoom: false,
+    minZoom: 0
+};
+
 const DEATHS = 'deaths';
 const RECOVERY = 'recovered';
 const CASES = 'cases';
@@ -38,6 +59,8 @@ const LEGEND_TITLE = '<h3>Color range of cases:</h3>';
 
 export {
     MAP_CENTER,
+    MAP_LAYER_OPTIONS,
+    MAP_OPTIONS,
     DEATHS,
     RECOVERY,
     CASES,
@@ -50,5 +73,6 @@ export {
     AMOUNT_PERIOD_DEATH,
     LEGEND_TITLE,
     COLORS_MAP,
-    COLORS_MAP_BORDER
+    COLORS_MAP_BORDER,
+    COUNTRY_HOVER_STYLE
 };

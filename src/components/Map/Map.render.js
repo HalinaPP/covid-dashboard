@@ -1,4 +1,10 @@
-import { MAP_CENTER, WORLD_MAP_URL, MAP_DIV_ID, LEGEND_TITLE } from '@/constants/map';
+import {
+    MAP_OPTIONS,
+    MAP_LAYER_OPTIONS,
+    WORLD_MAP_URL,
+    MAP_DIV_ID,
+    LEGEND_TITLE
+} from '@/constants/map';
 import { createHtmlElement } from '@/helpers/utils';
 import { onEachFeature, getLegendText } from './Map.service';
 import { store } from '@/redux/store';
@@ -6,25 +12,8 @@ import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import data from '@/data/countries.geo.json';
 
-const mapLayerOptions = {
-    attribution: '',
-    maxZoom: 16,
-    continuousWorld: false,
-    noWrap: true
-};
-
-const mapOptions = {
-    center: MAP_CENTER,
-    zoom: 2,
-    worldCopyJump: true,
-    preferCanvas: true,
-    zoomSnap: 0,
-    doubleClickZoom: false,
-    minZoom: 0
-};
-
 const getMapOptions = () => {
-    return mapOptions;
+    return MAP_OPTIONS;
 };
 
 export const renderMapContainer = (mainEl) => {
@@ -49,7 +38,7 @@ const renderScaleControl = () => {
 };
 
 const renderWorldMapLayer = () => {
-    return L.tileLayer(WORLD_MAP_URL, mapLayerOptions);
+    return L.tileLayer(WORLD_MAP_URL, MAP_LAYER_OPTIONS);
 };
 
 export const renderLegendToMap = () => {

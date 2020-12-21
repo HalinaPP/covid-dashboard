@@ -16,22 +16,22 @@ const plugins = () => {
         new HTMLWebpackPlugin({
             template: './index.html',
             minify: {
-                collapseWhitespace: isProd
-            }
+                collapseWhitespace: isProd,
+            },
         }),
         new CleanWebpackPlugin(),
 
         new MiniCssExtractPlugin({
-            filename: filename('css')
+            filename: filename('css'),
         }),
         new CopyPlugin({
             patterns: [
                 {
                     from: path.resolve(__dirname, 'src/assets/'),
-                    to: path.resolve(__dirname, 'dist/assets')
-                }
-            ]
-        })
+                    to: path.resolve(__dirname, 'dist/assets'),
+                },
+            ],
+        }),
     ];
 
     if (isProd) {
@@ -44,8 +44,8 @@ const plugins = () => {
 const optimization = () => {
     const config = {
         splitChunks: {
-            chunks: 'all'
-        }
+            chunks: 'all',
+        },
     };
 
     if (isProd) {
@@ -59,10 +59,10 @@ const cssLoaders = (extra) => {
         {
             loader: MiniCssExtractPlugin.loader,
             options: {
-                publicPath: '/'
-            }
+                publicPath: '/',
+            },
         },
-        'css-loader'
+        'css-loader',
     ];
     if (extra) {
         loaders.push(extra);
@@ -77,9 +77,9 @@ const jsloader = () => {
             loader: 'babel-loader',
             options: {
                 presets: ['@babel/preset-env'],
-                plugins: ['@babel/plugin-proposal-class-properties']
-            }
-        }
+                plugins: ['@babel/plugin-proposal-class-properties'],
+            },
+        },
     ];
 
     if (isDev) {
@@ -87,8 +87,8 @@ const jsloader = () => {
             loader: 'eslint-loader',
             options: {
                 configFile: '.eslintrc',
-                fix: true
-            }
+                fix: true,
+            },
         };
         loaders.push(eslint);
     }
@@ -99,18 +99,18 @@ module.exports = {
     context: path.resolve(__dirname, 'src'),
     mode: 'development',
     entry: {
-        main: ['@babel/polyfill', './index.js']
+        main: ['@babel/polyfill', './index.js'],
     },
     output: {
         filename: filename('js'),
-        path: path.resolve(__dirname, 'dist')
+        path: path.resolve(__dirname, 'dist'),
     },
     resolve: {
         extensions: ['.js', '.json', '.png'],
         alias: {
             '@models': path.resolve(__dirname, 'src/models'),
-            '@': path.resolve(__dirname, 'src')
-        }
+            '@': path.resolve(__dirname, 'src'),
+        },
     },
 
     optimization: optimization(),
@@ -119,7 +119,7 @@ module.exports = {
         port: 4200,
         overlay: true,
         open: true,
-        contentBase: path.resolve(__dirname, './dist')
+        contentBase: path.resolve(__dirname, './dist'),
     },
 
     devtool: isDev ? 'source-map' : false,
@@ -128,27 +128,27 @@ module.exports = {
         rules: [
             {
                 test: /\.css$/,
-                use: cssLoaders()
+                use: cssLoaders(),
             },
             {
                 test: /\.s[ac]ss$/,
-                use: cssLoaders('sass-loader')
+                use: cssLoaders('sass-loader'),
             },
 
             {
                 test: /\.(?:ico|png|jpg|svg|gif)$/i,
                 loader: 'file-loader',
                 options: {
-                    name: '[path][name].[ext]'
-                }
+                    name: '[path][name].[ext]',
+                },
             },
             {
                 test: /\.(ttf|woff|woff2|eot)$/,
-                use: ['file-loader']
+                use: ['file-loader'],
             },
             {
                 test: /\.xml$/,
-                use: ['xml-loader']
+                use: ['xml-loader'],
             },
             {
                 test: /\.m?js$/,
@@ -157,23 +157,23 @@ module.exports = {
                     loader: 'babel-loader',
                     options: {
                         presets: ['@babel/preset-env'],
-                        plugins: ['@babel/plugin-proposal-class-properties']
-                    }
-                }
+                        plugins: ['@babel/plugin-proposal-class-properties'],
+                    },
+                },
             },
             {
                 test: /\.(wav|mp3)$/i,
                 use: {
                     loader: 'file-loader',
                     options: {
-                        name: 'assets/audio/[hash][ext]'
-                    }
-                }
+                        name: 'assets/audio/[hash][ext]',
+                    },
+                },
             },
             {
                 test: /\.js$/,
-                use: jsloader()
-            }
-        ]
-    }
+                use: jsloader(),
+            },
+        ],
+    },
 };

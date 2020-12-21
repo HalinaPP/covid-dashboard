@@ -8,19 +8,15 @@ import {
     AMOUNT_PERIOD_DEATH,
     COLORS_MAP,
     COLORS_MAP_BORDER,
-    COUNTRY_HOVER_STYLE
+    COUNTRY_HOVER_STYLE,
 } from '@/constants/map';
 
 import L from 'leaflet';
 import { store } from '@/redux/store';
 import { getCountryInfo, getCountriesInfo } from '@/services/Countries';
 import { changeToCamelCaseString } from '@/helpers/utils';
-
-function handleClick() {
-    /*
-  setCurrCountry(country, event);
-  */
-}
+import { changeCountry } from '@/redux/actions/countryActions';
+import { connectedCountryActions } from '@/redux/store';
 
 const getDataType = () => {
     const state = store.getState();
@@ -110,10 +106,15 @@ const mouseOverFeature = (event) => {
 const mouseOutFeature = (event) => {
     const feature = event.target;
     feature.setStyle({
-        fillOpacity: 1
+        fillOpacity: 1,
     });
 
     feature.closePopup();
+};
+
+const handleClick = (event) => {
+    const countryId = event.target.feature.id;
+    connectedCountryActions.changeCountry(countryId);
 };
 
 const getColorIntensity = async (countryId) => {
@@ -139,7 +140,7 @@ export const setPoligonStyleByDataType = async (feature) => {
         fillColor: color,
         color: borderColor,
         weight: 2,
-        fillOpacity: 1
+        fillOpacity: 1,
     };
 };
 
@@ -149,6 +150,6 @@ export const onEachFeature = async (feature, layer) => {
     layer.on({
         mouseover: mouseOverFeature,
         mouseout: mouseOutFeature,
-        click: handleClick
+        click: handleClick,
     });
 };

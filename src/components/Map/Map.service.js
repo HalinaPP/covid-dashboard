@@ -111,8 +111,11 @@ const mouseOverFeature = (event) => {
 };
 
 const mouseOutFeature = (event) => {
-    // geoJsonLayer.resetStyle(evt.target);
     const feature = event.target;
+    feature.setStyle({
+        fillOpacity: 1
+    });
+
     feature.closePopup();
 };
 

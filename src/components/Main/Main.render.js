@@ -1,5 +1,5 @@
 import { loadMap } from '../Map/Map.render';
-import { createHtmlElement } from '../../helpers/utils';
+import { createHtmlElement } from '@/helpers/utils';
 import { renderCountryTable } from '../CountryTable/CountryTable.render';
 import { renderChart } from '../Chart/Chart.render';
 import { renderCountriesList } from '../CountriesList/CountriesList.render';

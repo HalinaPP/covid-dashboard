@@ -1,36 +1,38 @@
 @import './colors.scss';
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,700&display=swap');
 @mixin clearfix() {
-  &:before, &:after {
-    content: " ";
-    display: table;
-  }
-  &:after {
-    clear: both;
-  }
+    &:before,
+    &:after {
+        content: ' ';
+        display: table;
+    }
+    &:after {
+        clear: both;
+    }
 }
 @mixin flex($direction: row, $justify: center, $align: center) {
-  display: flex;
-  flex-direction: $direction;
-  justify-content: $justify;
-  align-items: $align;
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $justify;
+    align-items: $align;
 }
 @mixin border {
-  border: 0.2rem solid #09294e;
-  border-radius: 0.5rem;
+    border: 0.2rem solid #09294e;
+    border-radius: 0.5rem;
 }
 
-@mixin shadow{
-  box-shadow:-1px 2px 10px 5px rgba(133, 133, 133, 0.71);
+@mixin shadow {
+    box-shadow: -1px 2px 10px 5px rgba(133, 133, 133, 0.71);
 }
 
 *,
 *::before,
 *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
+
 
 body, html {
   background-color:$primary-color;
@@ -41,28 +43,29 @@ body, html {
   padding: 0;
   margin: 0;
   font-family: 'Roboto', sans-serif;
-}
+
+
 html {
-  font-family: sans-serif;
-  font-size:10px;
+    font-family: sans-serif;
+    font-size: 10px;
 }
 
-header{
-  flex: 0 0 auto;
-  @include flex;
-  @include border;
-  @include shadow;
-  column-gap: 3rem;
-  padding:1.5rem;
-  img{
-    width:5rem;
-  }
+header {
+    flex: 0 0 auto;
+    @include flex;
+    @include border;
+    @include shadow;
+    column-gap: 3rem;
+    padding: 1.5rem;
+    img {
+        width: 5rem;
+    }
 }
-main{
- width: 100%;
- @include flex(row,center,flex-start);
-  flex: 1 0 auto;
- column-gap: 0.5rem;
+main {
+    width: 100%;
+    @include flex(row, center, flex-start);
+    flex: 1 0 auto;
+    column-gap: 0.5rem;
 }
 a{
   text-decoration: none;
@@ -76,6 +79,7 @@ a{
   background-color: $second-color;
 }
 
+
 .left-col{
   height: 100%;
   flex-shrink:0;
@@ -84,9 +88,9 @@ a{
 .right-col{
   height: 100%;
   flex-grow:1;
-}
-aside{
-  @include flex(column, space-between,stretch);
+
+aside {
+    @include flex(column, space-between, stretch);
 }
 
 footer{
@@ -113,8 +117,18 @@ footer{
     @include flex();
     column-gap: 2rem;
   }
-}
 
+@media (max-width: 769px) {
+    main {
+        flex-wrap: wrap;
+        aside {
+            width: 40%;
+        }
+    }
+    aside:nth-child(1) {
+        order: 2;
+    }
+}
 
 @media screen and (max-width: 768px) {
   main{
@@ -137,6 +151,7 @@ footer{
 
 
 @import "chart";
+@import 'chart';
 @import './map.scss';
 @import 'table';
-@import "list";
+@import 'list';

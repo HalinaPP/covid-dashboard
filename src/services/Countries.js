@@ -7,7 +7,7 @@ import { GET_ALL_COUNTRIES_URL, GET_WORLD_URL } from '@/services/constant';
 function generateCountryObj(country) {
     if (!country) {
         return {
-            id: null,
+            id: null
         };
     }
     const countryObj = {
@@ -18,13 +18,13 @@ function generateCountryObj(country) {
         allPeriod: {
             cases: country.cases,
             deaths: country.deaths,
-            recovered: country.recovered,
+            recovered: country.recovered
         },
         lastDay: {
             cases: country.todayCases,
             deaths: country.todayDeaths,
-            recovered: country.todayRecovered,
-        },
+            recovered: country.todayRecovered
+        }
     };
     return countryObj;
 }
@@ -57,6 +57,10 @@ function getAllCountyriesInfo() {
 }
 
 export const getCountriesInfo = getAllCountyriesInfo();
+
+export const getCountryInfo = (countryId, countriesInfo) => {
+    return countriesInfo.filter((country) => country.id === countryId);
+};
 
 export async function getMapinfo(id) {
     const state = store.getState();

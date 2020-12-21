@@ -3,29 +3,29 @@ const AMOUNT_PERIOD = [
     [1001, 10000],
     [10001, 100000],
     [100001, 1000000],
-    [1000001, 30000000]
+    [1000001, 30000000],
 ];
 const AMOUNT_PERIOD_DEATH = [
     [0, 100],
     [101, 1000],
     [1001, 10000],
     [10001, 100000],
-    [100001, 5000000]
+    [100001, 5000000],
 ];
 
 const COLORS_MAP = {
     cases: ['#FFACAE', '#FF6064', '#9F3C3E', '#FF0007', '#790003'],
     recovered: ['#ABFECA', '#5FFE9A', '#00FA5D', '#3B9C5F', '#00772C'],
-    deaths: ['#B7B7B7', '#757575', '#484848', '#232323', '#111111']
+    deaths: ['#B7B7B7', '#757575', '#484848', '#232323', '#111111'],
 };
 
 const COLORS_MAP_BORDER = {
     cases: '#790003',
     recovered: '#00772C',
-    deaths: '#111111'
+    deaths: '#111111',
 };
 const COUNTRY_HOVER_STYLE = {
-    fillOpacity: 0.2
+    fillOpacity: 0.2,
 };
 const MAP_DIV_ID = 'map';
 const WORLD_MAP_URL =
@@ -36,7 +36,7 @@ const MAP_LAYER_OPTIONS = {
     attribution: '',
     maxZoom: 16,
     continuousWorld: false,
-    noWrap: true
+    noWrap: true,
 };
 
 const MAP_OPTIONS = {
@@ -46,7 +46,7 @@ const MAP_OPTIONS = {
     preferCanvas: true,
     zoomSnap: 0,
     doubleClickZoom: false,
-    minZoom: 0
+    minZoom: 0,
 };
 
 const DEATHS = 'deaths';
@@ -74,5 +74,5 @@ export {
     LEGEND_TITLE,
     COLORS_MAP,
     COLORS_MAP_BORDER,
-    COUNTRY_HOVER_STYLE
+    COUNTRY_HOVER_STYLE,
 };

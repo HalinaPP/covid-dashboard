@@ -3,7 +3,7 @@ import {
     MAP_LAYER_OPTIONS,
     WORLD_MAP_URL,
     MAP_DIV_ID,
-    LEGEND_TITLE
+    LEGEND_TITLE,
 } from '@/constants/map';
 import { createHtmlElement } from '@/helpers/utils';
 import { onEachFeature, getLegendText } from './Map.service';
@@ -11,6 +11,7 @@ import { store } from '@/redux/store';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import data from '@/data/countries.geo.json';
+import { renderFilter } from '../Filter/Filter.render';
 
 const getMapOptions = () => {
     return MAP_OPTIONS;
@@ -29,7 +30,7 @@ const renderWorldMap = (mapEl) => {
 
 const renderCountriesPoligonLayer = () => {
     return new L.GeoJSON(data, {
-        onEachFeature
+        onEachFeature,
     });
 };
 
@@ -49,7 +50,7 @@ export const renderLegendToMap = () => {
 
     const attrOptions = {
         prefix: innerText,
-        position: 'bottomleft'
+        position: 'bottomleft',
     };
 
     return L.control.attribution(attrOptions);
@@ -69,6 +70,7 @@ export const loadMap = async (mainEl) => {
 
     renderScaleControl().addTo(map);
     renderLegendToMap().addTo(map);
+    mapEl.appendChild(renderFilter());
 };
 
 store.subscribe(() => {

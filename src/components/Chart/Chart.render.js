@@ -3,6 +3,7 @@ import { CHART_DIV_ID } from './constants';
 import zingchart from 'zingchart';
 import { setChartData } from './Chart.service';
 import { myConfig, ONE_HUNDRED, ONE_MILLION } from '@/components/Chart/constants';
+import { setInfoContainer } from '@/components/Chart/Chart.service';
 zingchart.ASYNC = true;
 
 window.formatChartAxis = (v) => {
@@ -20,6 +21,8 @@ const renderChartWrapperContainer = (mainEl) => {
 
 const renderInfoContainer = (mainEl) => {
     const infoEl = createHtmlElement('div', 'chart--info');
+    const currentCountry = createHtmlElement('div', 'chart--info-country');
+    infoEl.appendChild(currentCountry);
     mainEl.appendChild(infoEl);
     return infoEl;
 };
@@ -46,5 +49,6 @@ export const renderChart = (mainEl) => {
     const chart = renderChartContainer(wrapper);
     renderCovidChart();
     setChartData();
+    setInfoContainer();
     return chart;
 };

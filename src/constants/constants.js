@@ -11,16 +11,15 @@ const RECOVERY_COLOR = 'green';
 const CASES_COLOR = 'red';
 
 const IMAGES = {
-    rsLogo: './assets/icons/rs_school_js.svg'
+    rsLogo: './assets/icons/rs_school_js.svg',
 };
 
-const FOOTER_COPYRIGHT_DEVELOPERS = `<a href='https://github.com/HalinaPP'>
+const FOOTER_COPYRIGHT_DEVELOPERS = `<span><a href='https://github.com/HalinaPP'>
                             @halinapp
-                          </a>,<a href='https://github.com/Arcuman'>@arcuman</a>
+                          </a> & <a href='https://github.com/Arcuman'>@arcuman</a></span>
                           <span>2020</span>`;
 const FOOTER_COPYRIGHT_RSSCHOOL = `<a href='https://rs.school/js/'>
                                         <img src="${IMAGES.rsLogo}" alt="RS SCHOOL">
-                                        RS SCHOOL
                                     </a>`;
 
 export {
@@ -35,5 +34,5 @@ export {
     MAP_DIV_ID,
     TITLE,
     FOOTER_COPYRIGHT_DEVELOPERS,
-    FOOTER_COPYRIGHT_RSSCHOOL
+    FOOTER_COPYRIGHT_RSSCHOOL,
 };

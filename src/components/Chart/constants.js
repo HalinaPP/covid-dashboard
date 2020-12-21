@@ -1,3 +1,8 @@
+import color from '@/styles/colors.scss';
+
+export const PRIMARY_COLOR = '#a9c7ea';
+export const SECOND_COLOR = '#000';
+export const GRAPHIC_COLOR = '#376398';
 export const CHART_DIV_ID = 'chart';
 export const ONE_MILLION = 1000000;
 export const ONE_HUNDRED = 1000;
@@ -7,72 +12,64 @@ export const GET_COUNTRY_HISTORY_URL_BY_NAME = (name) =>
 
 export const myConfig = {
     type: 'bar',
-    backgroundColor: '#f4f4f4',
-    title: {
-        text: 'Covid stats',
-        backgroundColor: 'none',
-        color: '#818181',
-        fontFamily: 'Roboto',
-        fontSize: '16px',
-        height: '16px',
-    },
+    backgroundColor: PRIMARY_COLOR,
     legend: {
         visible: false,
     },
     scaleX: {
         guide: {
-            lineColor: '#c7c9c9',
+            lineColor: SECOND_COLOR,
             lineStyle: 'solid',
         },
         item: {
-            fontColor: '#818181',
+            fontColor: SECOND_COLOR,
             fontSize: '10px',
         },
         label: {
             visible: false,
         },
         labels: [],
-        lineColor: '#c7c9c9',
+        lineColor: SECOND_COLOR,
         lineWidth: '1px',
-        maxLabels: 7,
+        maxLabels: 12,
         mirrored: true,
         tick: {
-            lineColor: '#c7c9c9',
+            lineColor: SECOND_COLOR,
             lineWidth: '1px',
         },
     },
     scaleY: {
         format: 'formatChartAxis()',
         guide: {
-            lineColor: '#c7c9c9',
+            lineColor: SECOND_COLOR,
             lineStyle: 'solid',
         },
         item: {
             paddingRight: '0px',
-            fontColor: '#818181',
+            fontColor: SECOND_COLOR,
             fontSize: '10px',
         },
-        lineColor: '#c7c9c9',
+        lineColor: SECOND_COLOR,
         lineWidth: '1px',
         refLine: {
             alpha: 0.25,
-            lineColor: '#c7c9c9',
+            lineColor: SECOND_COLOR,
             visible: true,
         },
         shadow: false,
         tick: {
-            lineColor: '#c7c9c9',
+            lineColor: SECOND_COLOR,
             lineWidth: '1px',
         },
         labels: [],
         maxLabels: 7,
     },
     plot: {
-        lineColor: '#00baf0',
+        lineColor: SECOND_COLOR,
         lineWidth: '1px',
         marker: {
-            backgroundColor: '#fbfbfb',
-            borderColor: '#00baf0',
+            backgroundColor: SECOND_COLOR,
+            borderColor: SECOND_COLOR,
             borderWidth: '2px',
             shadow: false,
             size: '3px',
@@ -82,8 +79,8 @@ export const myConfig = {
         shadow: false,
     },
     plotarea: {
-        backgroundColor: '#fbfbfb',
-        margin: '10% 25px 10% 40px',
+        backgroundColor: PRIMARY_COLOR,
+        margin: '10% 25px 11% 40px',
     },
     crosshairX: {
         plotLabel: {
@@ -96,7 +93,7 @@ export const myConfig = {
             type: 'bar',
             text: 'Cases',
             values: [],
-            backgroundColor: '#003849',
+            backgroundColor: PRIMARY_COLOR,
             scales: 'scale-x,scale-y',
         },
     ],

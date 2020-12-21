@@ -1,19 +1,17 @@
 .chart-wrapper{
+  flex: 0 0 auto;
+  margin: 10px;
   @include border;
   @include shadow;
   @include flex(column);
-  flex: 0 0 auto;
-  margin: 10px;
+
 }
 .chart--container {
-
-  background: yellow;
   height: auto;
   width: 100%;
 }
 
 .chart--info{
-  background: yellow;
   display: block;
   height: 30px;
   width: 100%;

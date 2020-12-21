@@ -1,9 +1,15 @@
 import zingchart from 'zingchart';
-import { CHART_DIV_ID, GET_COUNTRY_HISTORY_URL_BY_NAME } from '@/components/Chart/constants';
+import {
+    CHART_DIV_ID,
+    GET_COUNTRY_HISTORY_URL_BY_NAME,
+    GRAPHIC_COLOR,
+    secondColor
+} from '@/components/Chart/constants';
 import { store } from '@/redux/store';
 import { CASES, DEATHS, RECOVERY } from '@/constants/constants';
 import { ABSOLUTE, ALL_PERIOD, LAST_DAY, RELATIVE } from '@/services/filterTypes';
 import { getCountriesInfo } from '@/services/Countries';
+import { createHtmlElement } from '@/helpers/utils';
 
 function countCountryRelativeOneHundred(casesValue, population) {
     return Math.round(casesValue / (population / 100000));
@@ -26,7 +32,7 @@ export async function getChartInfo() {
     const population = countryPop.population;
     const response = await fetch(GET_COUNTRY_HISTORY_URL_BY_NAME(countryName));
     const responseData = await response.json();
-    console.log(state.country.casesType);
+
     switch (state.country.casesType) {
         case CASES:
             result.casesType = CASES;
@@ -87,7 +93,7 @@ export const setChartData = async () => {
                     type: 'bar',
                     text: jsonData.casesType,
                     values: jsonData.casesCount,
-                    backgroundColor: '#003849',
+                    backgroundColor: GRAPHIC_COLOR,
                     scales: 'scale-x,scale-y'
                 }
             ],
@@ -101,3 +107,13 @@ export const setChartData = async () => {
         }
     });
 };
+
+export const setInfoContainer = () => {
+    const countryName = document.body.querySelector('.chart--info-country');
+    countryName.innerHTML = store.getState().country.activeCountry;
+};
+
+store.subscribe(() => {
+    setChartData();
+    setInfoContainer();
+});

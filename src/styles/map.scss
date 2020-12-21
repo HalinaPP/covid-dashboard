@@ -24,11 +24,9 @@
 .recovered-color-border {
     color: $green-i5;
 }
-
 #map {
     flex: 1 0 auto;
     margin: 10px;
-
     @include border;
     @include shadow;
 }
@@ -147,8 +145,3 @@
     }
 }
 
-@media (max-width: 769px) {
-    #map {
-        width: 100%;
-    }
-}

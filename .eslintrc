@@ -28,7 +28,7 @@
     "no-plusplus": "off",
     "space-before-function-paren": 0,
     "eol-last": "off",
-    "comma-dangle": "off",
+    "comma-dangle": "on",
 
     "quotes": ["error", "single"],
     "no-underscore-dangle": "off",

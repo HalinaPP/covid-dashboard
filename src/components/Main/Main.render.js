@@ -8,13 +8,17 @@ export const renderMainContent = () => {
     const mainEl = createHtmlElement('main', 'main');
     document.body.appendChild(mainEl);
 
-    mainEl.appendChild(renderCountriesList());
-    loadMap(mainEl);
+    const leftCol = createHtmlElement('aside', 'left-col');
+    mainEl.appendChild(leftCol);
 
     const rightCol = createHtmlElement('aside', 'right-col');
-    rightCol.appendChild(renderCountryTable());
-    rightCol.appendChild(renderChart());
     mainEl.appendChild(rightCol);
+
+    renderCountriesList(leftCol);
+    renderCountryTable(leftCol);
+
+    loadMap(rightCol);
+    renderChart(rightCol);
 
     return mainEl;
 };

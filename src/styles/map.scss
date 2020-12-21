@@ -26,8 +26,9 @@
 }
 
 #map {
-    width: 60%;
-    height: 80vh;
+    flex: 1 0 auto;
+    margin: 10px;
+
     @include border;
     @include shadow;
 }

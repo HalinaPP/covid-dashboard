@@ -5,7 +5,7 @@ import { renderFooter } from '../Footer/Footer.render';
 import { renderMainContent } from '../Main/Main.render';
 
 export const renderPage = () => {
-    renderFavicon(FAVICON_URL);
+    // renderFavicon(FAVICON_URL);
     document.body.append(renderHeader());
     renderMainContent();
     document.body.append(renderFooter());

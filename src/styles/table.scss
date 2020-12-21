@@ -1,0 +1,7 @@
+.countriy-data-table{
+  @include border;
+  @include shadow;
+  @include flex(column);
+  height: 250px;
+  margin: 10px;
+}

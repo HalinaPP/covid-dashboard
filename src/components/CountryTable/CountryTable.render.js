@@ -1,7 +1,12 @@
 import { createHtmlElement } from '@/helpers/utils';
 
-export const renderCountryTable = () => {
+const renderTableWrapperContainer = (mainEl) => {
     const table = createHtmlElement('div', 'countriy-data-table');
-    table.innerHTML = 'table';
+    mainEl.appendChild(table);
     return table;
+};
+
+export const renderCountryTable = (mainEl) => {
+    const wrapper = renderTableWrapperContainer(mainEl);
+    wrapper.innerHTML = 'table';
 };

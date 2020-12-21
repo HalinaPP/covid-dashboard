@@ -1,7 +1,8 @@
 import { LAST_DAY, ALL_PERIOD, ABSOLUTE, RELATIVE } from './filterTypes';
 import countriesData from '@/data/countries.json';
 import { store } from '@/redux/store';
-import { CASES, DEATHS, RECOVERY } from '@/constants/map';
+import { CASES, DEATHS, RECOVERY } from '@/constants/constants';
+import { GET_ALL_COUNTRIES_URL, GET_WORLD_URL } from '@/services/constant';
 
 function generateCountryObj(country) {
     if (!country) {
@@ -10,9 +11,9 @@ function generateCountryObj(country) {
         };
     }
     const countryObj = {
-        id: country.countryInfo.iso3,
-        name: country.country,
-        flag: country.countryInfo.flag,
+        id: country.countryInfo ? country.countryInfo.iso3 : 'all',
+        name: country.country || 'all',
+        flag: country.countryInfo ? country.countryInfo.flag : '',
         population: country.population,
         allPeriod: {
             cases: country.cases,
@@ -43,9 +44,14 @@ function getAllCountyriesInfo() {
         if (cachedInfo) {
             return cachedInfo;
         }
-        const response = await fetch('https://disease.sh/v3/covid-19/countries?yesterday=1');
-        const coundtryData = await response.json();
+        const responseCountries = await fetch(GET_ALL_COUNTRIES_URL);
+        const coundtryData = await responseCountries.json();
         cachedInfo = await generateCountryArr(coundtryData);
+        const responseWorld = await fetch(GET_WORLD_URL);
+        const worldData = await responseWorld.json();
+        console.log(worldData);
+        const worldObj = await generateCountryObj(worldData);
+        cachedInfo.push(worldObj);
         return cachedInfo;
     };
 }
@@ -59,20 +65,18 @@ export const getCountryInfo = (countryId, countriesInfo) => {
 export async function getMapinfo(id) {
     const state = store.getState();
     const countries = await getCountriesInfo();
-    console.log(id);
-    console.log(countries);
-    const countryObj = countries.find((obj) => obj.id === id);
+    const countryObj = countries.find((item) => item.id === id || item.name === id);
     if (countryObj.id === null) {
         return -1;
     }
     let periodObj;
     let result;
+    console.log(state.country.period);
     if (state.country.period === ALL_PERIOD) {
         periodObj = countryObj.allPeriod;
     } else if (state.country.period === LAST_DAY) {
         periodObj = countryObj.lastDay;
     }
-
     let casesValue;
     switch (state.country.casesType) {
         case CASES:

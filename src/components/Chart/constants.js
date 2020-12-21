@@ -83,7 +83,7 @@ export const myConfig = {
     },
     plotarea: {
         backgroundColor: '#fbfbfb',
-        margin: '10% 25px 5% 40px',
+        margin: '10% 25px 10% 40px',
     },
     crosshairX: {
         plotLabel: {

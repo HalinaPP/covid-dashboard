@@ -8,12 +8,16 @@ export const renderMainContent = () => {
     const mainEl = createHtmlElement('main', 'main');
     document.body.appendChild(mainEl);
 
-    mainEl.appendChild(renderCountriesList());
-    loadMap(mainEl);
+    const leftCol = createHtmlElement('aside', 'left-col');
+    mainEl.appendChild(leftCol);
 
     const rightCol = createHtmlElement('aside', 'right-col');
     mainEl.appendChild(rightCol);
-    rightCol.appendChild(renderCountryTable());
+
+    renderCountriesList(leftCol);
+    renderCountryTable(leftCol);
+
+    loadMap(rightCol);
     renderChart(rightCol);
 
     return mainEl;

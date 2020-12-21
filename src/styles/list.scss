@@ -1,0 +1,7 @@
+.countries-list{
+  @include border;
+  @include shadow;
+  @include flex(column);
+  flex: 1 0 auto;
+  margin: 10px;
+}

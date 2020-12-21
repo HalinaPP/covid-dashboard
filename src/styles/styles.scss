@@ -35,6 +35,8 @@
 body, html {
   background-color:#a9c7ea;
   font-size:1.4rem;
+  display: flex;
+  flex-direction: column;
   height: 100%;
   padding: 0;
   margin: 0;
@@ -45,6 +47,7 @@ html {
 }
 
 header{
+  flex: 0 0 auto;
   @include flex;
   @include border;
   @include shadow;
@@ -56,20 +59,25 @@ header{
 }
 main{
  width: 100%;
- @include flex();
-
+ @include flex(row,center,flex-start);
+  flex: 1 0 auto;
  column-gap: 0.5rem;
- margin: 0.5rem 0;
 }
 
+.left-col{
+  min-height: 100%;
+  width: 40%;
+}
+.right-col{
+  min-height: 100%;
+  width: 60%;
+}
 aside{
-  width:20%;
-  @include border;
-  @include shadow;
-  min-width: 20rem;
+  @include flex(column, space-between,stretch);
 }
 
 footer{
+  flex: 0 0 auto;
   padding:1.5rem;
   @include border;
   @include shadow;
@@ -98,3 +106,5 @@ footer{
 
 @import "chart";
 @import './map.scss';
+@import 'table';
+@import "list";

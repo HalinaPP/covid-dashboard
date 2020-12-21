@@ -1,4 +1,4 @@
-import { createHtmlElement } from '../../helpers/utils';
+import { createHtmlElement } from '@/helpers/utils';
 
 const renderTableWrapperContainer = (mainEl) => {
     const table = createHtmlElement('div', 'countriy-data-table');

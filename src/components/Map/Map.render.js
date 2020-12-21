@@ -1,29 +1,19 @@
-import { MAP_CENTER, WORLD_MAP_URL, MAP_DIV_ID } from '../../constants/constants';
-import { createHtmlElement } from '../../helpers/utils';
-import { onEachFeature, setPoligonStyleByDataType } from './Map.service';
+import {
+    MAP_OPTIONS,
+    MAP_LAYER_OPTIONS,
+    WORLD_MAP_URL,
+    MAP_DIV_ID,
+    LEGEND_TITLE
+} from '@/constants/map';
+import { createHtmlElement } from '@/helpers/utils';
+import { onEachFeature, getLegendText } from './Map.service';
+import { store } from '@/redux/store';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import data from '../../data/countries.geo.json';
-
-const mapLayerOptions = {
-    attribution: '',
-    maxZoom: 16,
-    continuousWorld: false,
-    noWrap: true
-};
-
-const mapOptions = {
-    center: MAP_CENTER,
-    zoom: 2,
-    worldCopyJump: true,
-    preferCanvas: true,
-    zoomSnap: 0,
-    doubleClickZoom: false,
-    minZoom: 0
-};
+import data from '@/data/countries.geo.json';
 
 const getMapOptions = () => {
-    return mapOptions;
+    return MAP_OPTIONS;
 };
 
 export const renderMapContainer = (mainEl) => {
@@ -39,8 +29,7 @@ const renderWorldMap = (mapEl) => {
 
 const renderCountriesPoligonLayer = () => {
     return new L.GeoJSON(data, {
-        style: setPoligonStyleByDataType,
-        onEachFeature: onEachFeature
+        onEachFeature
     });
 };
 
@@ -49,25 +38,39 @@ const renderScaleControl = () => {
 };
 
 const renderWorldMapLayer = () => {
-    return L.tileLayer(WORLD_MAP_URL, mapLayerOptions);
+    return L.tileLayer(WORLD_MAP_URL, MAP_LAYER_OPTIONS);
 };
 
-const renderLegendToMap = () => {
+export const renderLegendToMap = () => {
+    const innerText = `<div class="legend">
+                            ${LEGEND_TITLE}
+                            <div class="legend-info">${getLegendText()}</div>
+                        </div>`;
+
     const attrOptions = {
-        prefix: '<b>Legend:</b><div>Color range of cases</div>',
+        prefix: innerText,
         position: 'bottomleft'
     };
 
     return L.control.attribution(attrOptions);
 };
 
-export const loadMap = (mainEl) => {
-    console.log('map load');
+const changeLegendText = () => {
+    const legend = document.querySelector('.legend-info');
+    legend.innerHTML = getLegendText();
+};
+
+export const loadMap = async (mainEl) => {
     const mapEl = renderMapContainer(mainEl);
 
     const map = renderWorldMap(mapEl);
     map.addLayer(renderWorldMapLayer());
     renderCountriesPoligonLayer().addTo(map);
+
     renderScaleControl().addTo(map);
     renderLegendToMap().addTo(map);
 };
+
+store.subscribe(() => {
+    changeLegendText();
+});

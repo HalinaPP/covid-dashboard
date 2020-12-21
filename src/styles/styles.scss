@@ -123,17 +123,6 @@ footer {
     column-gap: 2rem;
   }
 }
-@media (max-width: 769px) {
-    main {
-        flex-wrap: wrap;
-        aside {
-            width: 40%;
-        }
-    }
-    aside:nth-child(1) {
-        order: 2;
-    }
-}
 
 @media screen and (max-width: 768px) {
   main{

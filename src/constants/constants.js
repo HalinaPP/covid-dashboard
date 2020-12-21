@@ -3,8 +3,8 @@ const FAVICON_URL = `${ICON_PATH}/favicon.ico`;
 const TITLE = 'Covid-19 dashbord';
 
 const IMAGES = {
-
-
+    rsLogo: `${ICON_PATH}/rs_school_js.svg`,
+};
 // const FOOTER_COPYRIGHT_DEVELOPERS = `<span><a href='https://github.com/HalinaPP'>
 //                             @halinapp
 //                           </a> & <a href='https://github.com/Arcuman'>@arcuman</a></span>

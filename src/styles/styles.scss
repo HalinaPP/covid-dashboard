@@ -35,15 +35,15 @@
 
 
 body, html {
-  background-color:$primary-color;
-  font-size:1.4rem;
+  background-color: $primary-color;
+  font-size: 1.4rem;
   display: flex;
   flex-direction: column;
   height: 100%;
   padding: 0;
   margin: 0;
   font-family: 'Roboto', sans-serif;
-
+}
 
 html {
     font-family: sans-serif;
@@ -85,39 +85,44 @@ a{
   flex-shrink:0;
   flex-basis: 40%;
 }
-.right-col{
+.right-col {
   height: 100%;
-  flex-grow:1;
-
+  flex-grow: 1;
+}
 aside {
     @include flex(column, space-between, stretch);
 }
 
-footer{
+footer {
   flex: 0 0 auto;
-  padding:1.5rem;
+  padding: 1.5rem;
   @include border;
   @include shadow;
   @include flex(row, space-between);
   column-gap: 5rem;
-  a{
+
+  a {
     color: $second-color;
     font-weight: bold;
   }
-  .developers{
+
+  .developers {
 
   }
-  span{
-   font-weight:bold;
+
+  span {
+    font-weight: bold;
   }
-  img{
-    width:7rem;
+
+  img {
+    width: 7rem;
   }
-  .school{
+
+  .school {
     @include flex();
     column-gap: 2rem;
   }
-
+}
 @media (max-width: 769px) {
     main {
         flex-wrap: wrap;

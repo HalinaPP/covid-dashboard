@@ -1,64 +1,153 @@
+@mixin color-circle($colorName) {
+    border-radius: 50%;
+    width: 1rem;
+    height: 1rem;
+    background-color: $colorName;
+}
 
-#map{
+.cases-color {
+    color: $red-i4;
+}
+.cases-color-border {
+    color: $red-i5;
+}
+
+.deaths-color {
+    color: $black-i4;
+}
+.deaths-color-border {
+    color: $black-i5;
+}
+.recovered-color {
+    color: $green-i4;
+}
+.recovered-color-border {
+    color: $green-i5;
+}
+
+#map {
     width: 60%;
     height: 80vh;
     @include border;
     @include shadow;
-  }
-  .map-box, .legend {
+}
+
+.popup-country-title {
+    font-size: 1.4rem;
+    span {
+        font-size: 1.6rem;
+        font-weight: bold;
+    }
+}
+
+.legend {
+    z-index: 100;
+    padding: 0.6rem 0.8rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    line-height: 1.8rem;
+    text-align: left;
+    background-color: transparent;
+
+    &-item {
+        @include flex(row, flex-start);
+        column-gap: 1rem;
+    }
+    h3 {
+        font-size: 1.2rem;
+    }
+
+    .red-i1-circle {
+        @include color-circle($red-i1);
+    }
+    .red-i2-circle {
+        @include color-circle($red-i2);
+    }
+    .red-i3-circle {
+        @include color-circle($red-i3);
+    }
+    .red-i4-circle {
+        @include color-circle($red-i4);
+    }
+    .red-i5-circle {
+        @include color-circle($red-i5);
+    }
+
+    .green-i1-circle {
+        @include color-circle($green-i1);
+    }
+    .green-i2-circle {
+        @include color-circle($green-i2);
+    }
+    .green-i3-circle {
+        @include color-circle($green-i3);
+    }
+    .green-i4-circle {
+        @include color-circle($green-i4);
+    }
+    .green-i5-circle {
+        @include color-circle($green-i5);
+    }
+
+    .black-i1-circle {
+        @include color-circle($black-i1);
+    }
+    .black-i2-circle {
+        @include color-circle($black-i2);
+    }
+    .black-i3-circle {
+        @include color-circle($black-i3);
+    }
+    .black-i4-circle {
+        @include color-circle($black-i4);
+    }
+    .black-i5-circle {
+        @include color-circle($black-i5);
+    }
+}
+
+.map-box {
     padding: 6px 8px;
     background: rgba(#fff, 0.9);
     border-radius: 5px;
     box-shadow: 0 0 15px rgba(#000, 0.2);
     text-align: center;
     z-index: 100;
-  }
-  
-  .legend {
-    font: 14px/16px Arial, Helvetica, sans-serif;
-    font-weight: bold;
-    line-height: 18px;
-    color: #555;
-    width: 100px;
-    i {
-      clear: both;
-      width: 16px;
-      height: 16px;
-      float: left;
-      opacity: 0.7;
-      margin-right: 8px;
-    }
-  }
-  
-  .map-box {
+
     &.coordinates {
-      position: absolute;
-      top: 10px;
-      right: 10px;
+        position: absolute;
+        top: 10px;
+        right: 10px;
     }
     &.country-data {
-      position: absolute;
-      bottom: 10px;
-      left: 10px;
-      padding: 6px 16px;
-      line-height: 1.1em;
-      font-size: 1.5em;
-      font-weight: bold;
-      display: flex;
-      .col {
-        margin: auto;
-        padding-right: 16px;
-        float: left;
-        @include clearfix;
-        &:last-child {
-          padding-right: 0;
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        padding: 6px 16px;
+        line-height: 1.1em;
+        font-size: 1.5em;
+        font-weight: bold;
+        display: flex;
+        .col {
+            margin: auto;
+            padding-right: 16px;
+            float: left;
+            @include clearfix;
+            &:last-child {
+                padding-right: 0;
+            }
+            .row {
+                display: block;
+            }
         }
-        .row {
-          display: block;
+        .capital {
+            font-size: 75%;
         }
-      }
-      .capital {
-        font-size: 75%;
-      }
     }
-  }
+}
+
+@media (max-width: 769px) {
+    #map {
+        width: 100%;
+    }
+}

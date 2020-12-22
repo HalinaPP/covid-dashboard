@@ -4,9 +4,10 @@ export const PRIMARY_COLOR = '#C2D9F4';
 export const SECOND_COLOR = '#000';
 export const GRAPHIC_COLOR = '#376398';
 export const CHART_DIV_ID = 'chart';
+
 export const ONE_MILLION = 1000000;
 export const ONE_HUNDRED = 1000;
-
+export const WORLD_IMG_URL = 'https://i.ibb.co/LJhXnKQ/earth-PNG39.png';
 export const GET_COUNTRY_HISTORY_URL_BY_NAME = (name) =>
     `https://disease.sh/v3/covid-19/historical/${name}?lastdays=365`;
 
@@ -80,7 +81,7 @@ export const myConfig = {
     },
     plotarea: {
         backgroundColor: PRIMARY_COLOR,
-        margin: '10% 25px 11% 40px',
+        margin: '10% 25px 25px 40px',
     },
     crosshairX: {
         plotLabel: {

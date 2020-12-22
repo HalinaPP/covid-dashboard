@@ -6,7 +6,14 @@ import {
     secondColor,
 } from '@/components/Chart/constants';
 import { store } from '@/redux/store';
-import { CASES, DEATHS, RECOVERY } from '@/constants/map';
+import {
+    CASES,
+    CASES_COLOR,
+    DEATHS,
+    DEATHS_COLOR,
+    RECOVERY,
+    RECOVERY_COLOR,
+} from '@/constants/map';
 import { ABSOLUTE, ALL_PERIOD, LAST_DAY, RELATIVE } from '@/services/filterTypes';
 import { getCountriesInfo } from '@/services/Countries';
 import { createHtmlElement } from '@/helpers/utils';
@@ -29,7 +36,6 @@ export async function getChartInfo() {
     const countryPop = countries.find(
         (item) => item.id === countryName || item.name === countryName
     );
-    console.log(countryPop);
     const population = countryPop.population;
     const response = await fetch(GET_COUNTRY_HISTORY_URL_BY_NAME(countryName));
     const responseData = await response.json();
@@ -84,6 +90,21 @@ export async function getChartInfo() {
     return result;
 }
 
+function getGraphicColor() {
+    const state = store.getState();
+    switch (state.country.casesType) {
+        case CASES:
+            return CASES_COLOR;
+        case DEATHS:
+            return DEATHS_COLOR;
+        case RECOVERY:
+            return RECOVERY_COLOR;
+        default:
+            break;
+    }
+    return null;
+}
+
 export const setChartData = async () => {
     const jsonData = await getChartInfo();
     // set
@@ -94,7 +115,7 @@ export const setChartData = async () => {
                     type: 'bar',
                     text: jsonData.casesType,
                     values: jsonData.casesCount,
-                    backgroundColor: GRAPHIC_COLOR,
+                    backgroundColor: getGraphicColor(),
                     scales: 'scale-x,scale-y',
                 },
             ],

@@ -3,6 +3,7 @@ import { getCountriesInfo, getMapinfo } from '@/services/Countries';
 import { ALL_PERIOD, LAST_DAY } from '@/services/filterTypes';
 import { CASES, DEATHS, RECOVERY } from '@/constants/map';
 import { createHtmlElement } from '@/helpers/utils';
+import { WORLD_IMG_URL } from '@/components/Chart/constants';
 
 async function getCountries() {
     const state = store.getState();
@@ -12,18 +13,8 @@ async function getCountries() {
         if (!country.id) {
             return null;
         }
-        let casesObj;
+        const casesObj = country.allPeriod;
         let cases;
-        switch (state.country.period) {
-            case ALL_PERIOD:
-                casesObj = country.allPeriod;
-                break;
-            case LAST_DAY:
-                casesObj = country.lastDay;
-                break;
-            default:
-                break;
-        }
         switch (state.country.casesType) {
             case CASES:
                 cases = casesObj.cases;
@@ -51,33 +42,58 @@ function renderCountryItem(country) {
     const countryDiv = createHtmlElement('div');
     countryDiv.id = country.id;
     countryDiv.innerHTML = `
-            <img src="${country.flag}" width="35" height="25" alt="flag">
-            <span>${country.name}</span>
+            <img src="${
+                country.name !== 'all' ? country.flag : WORLD_IMG_URL
+            }" width="35" height="25" alt="flag">
+            <span id="name">${country.name !== 'all' ? country.name : 'World'}</span>
             <span> ${country.cases}</span>
             `;
     countryLi.append(countryDiv);
     countryDiv.addEventListener('click', (e) => {
+        const state = store.getState().country;
         e.stopPropagation();
-        connectedCountryActions.changeCountry(e.target.closest('div').id);
+        if (e.target.closest('div').id !== state.activeCountry)
+            connectedCountryActions.changeCountry(e.target.closest('div').id);
     });
     return countryLi;
 }
 
 export const setCountries = async () => {
     const list = document.querySelector('.countries-list');
+    const state = store.getState().country;
+    let selectedCountry = null;
     list.innerHTML = '';
     const countries = await getCountries();
-
     countries.forEach((country) => {
         if (!country) {
             return;
         }
         const countryLi = renderCountryItem(country);
-
-        list.append(countryLi);
+        if (state.activeCountry === country.id) {
+            selectedCountry = countryLi;
+        } else {
+            list.append(countryLi);
+        }
     });
+    selectedCountry.classList.add('active');
+    list.prepend(selectedCountry);
 };
 
-store.subscribe(() => {
-    setCountries();
+export const doSearch = () => {
+    const countryListContainer = document.body.querySelector('.countries-list');
+    const search = document.body.querySelector('.list--search-search');
+    const liArr = countryListContainer.children;
+    for (let i = 1; i < liArr.length; i++) {
+        const node = liArr[i].querySelector('#name');
+        if (node.innerHTML.toLowerCase().indexOf(search.value.toLowerCase()) !== -1) {
+            liArr[i].classList.remove('hidden');
+        } else {
+            liArr[i].classList.add('hidden');
+        }
+    }
+};
+
+store.subscribe(async () => {
+    await setCountries();
+    doSearch();
 });

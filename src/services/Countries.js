@@ -6,7 +6,7 @@ import { GET_ALL_COUNTRIES_URL, GET_WORLD_URL } from '@/services/constant';
 function generateCountryObj(country) {
     if (!country) {
         return {
-            id: null
+            id: null,
         };
     }
     const countryObj = {
@@ -17,13 +17,13 @@ function generateCountryObj(country) {
         allPeriod: {
             cases: country.cases,
             deaths: country.deaths,
-            recovered: country.recovered
+            recovered: country.recovered,
         },
         lastDay: {
             cases: country.todayCases,
             deaths: country.todayDeaths,
-            recovered: country.todayRecovered
-        }
+            recovered: country.todayRecovered,
+        },
     };
     return countryObj;
 }
@@ -38,11 +38,13 @@ function generateCountryArr(data) {
 }
 
 function getAllCountyriesInfo() {
-    let cachedInfo;
+    let cachedInfo = [];
     return async () => {
-        if (cachedInfo) {
+        if (cachedInfo.length > 0) {
+            console.log(1);
             return cachedInfo;
         }
+        console.log(2);
         const responseCountries = await fetch(GET_ALL_COUNTRIES_URL);
         const coundtryData = await responseCountries.json();
         cachedInfo = await generateCountryArr(coundtryData);
@@ -57,7 +59,6 @@ function getAllCountyriesInfo() {
 }
 
 export const getCountriesInfo = getAllCountyriesInfo();
-
 export const getCountryInfo = (countryId, countriesInfo) => {
     return countriesInfo.filter((country) => country.id === countryId);
 };
@@ -80,7 +81,7 @@ export async function getMapinfo(id) {
     const casesValue = {
         cases: periodObj.cases,
         deaths: periodObj.deaths,
-        recovered: periodObj.recovered
+        recovered: periodObj.recovered,
     };
 
     const casesValueAmount = Object.entries(casesValue).map((item) => {

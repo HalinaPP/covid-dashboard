@@ -3,8 +3,10 @@ import { createHtmlElement } from '@/helpers/utils';
 import { renderCountryTable } from '../CountryTable/CountryTable.render';
 import { renderChart } from '../Chart/Chart.render';
 import { renderCountriesList } from '../CountriesList/CountriesList.render';
+import { getCountriesInfo } from '@/services/Countries';
 
-export const renderMainContent = () => {
+export const renderMainContent = async () => {
+    await getCountriesInfo();
     const mainEl = createHtmlElement('main', 'main');
     document.body.appendChild(mainEl);
 

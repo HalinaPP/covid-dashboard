@@ -2,10 +2,10 @@
     @include border;
     @include shadow;
     @include flex(column, flex-start);
+    background: $primary-color-light;
     row-gap: 2rem;
-    height: 234px;
     margin: 10px;
-
+    flex: 1 0 auto;
     &-header {
         @include flex();
         column-gap: 1rem;

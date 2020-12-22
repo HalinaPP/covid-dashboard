@@ -26,9 +26,6 @@ export async function getChartInfo() {
     };
     const countries = await getCountriesInfo();
     const countryName = state.country.activeCountry;
-    console.log(state.country.activeCountry);
-    console.log(state.country);
-    console.log(countries);
     const countryPop = countries.find(
         (item) => item.id === countryName || item.name === countryName
     );

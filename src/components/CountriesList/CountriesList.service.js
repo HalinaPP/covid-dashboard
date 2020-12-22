@@ -8,7 +8,6 @@ async function getCountries() {
     const state = store.getState();
 
     const countries = await getCountriesInfo();
-    console.log(countries);
     return countries.map((country) => {
         if (!country.id) {
             return null;
@@ -47,6 +46,23 @@ async function getCountries() {
     });
 }
 
+function renderCountryItem(country) {
+    const countryLi = createHtmlElement('li');
+    const countryDiv = createHtmlElement('div');
+    countryDiv.id = country.id;
+    countryDiv.innerHTML = `
+            <img src="${country.flag}" width="35" height="25" alt="flag">
+            <span>${country.name}</span>
+            <span> ${country.cases}</span>
+            `;
+    countryLi.append(countryDiv);
+    countryDiv.addEventListener('click', (e) => {
+        e.stopPropagation();
+        connectedCountryActions.changeCountry(e.target.closest('div').id);
+    });
+    return countryLi;
+}
+
 export const setCountries = async () => {
     const list = document.querySelector('.countries-list');
     list.innerHTML = '';
@@ -56,19 +72,8 @@ export const setCountries = async () => {
         if (!country) {
             return;
         }
-        const countryLi = createHtmlElement('li');
-        const countryDiv = createHtmlElement('div');
-        countryDiv.id = country.id;
-        countryDiv.innerHTML = `
-            <img src="${country.flag}" width="35" height="25" alt="flag">
-            <span>${country.name}</span>
-            <span> ${country.cases}</span>
-            `;
-        countryLi.append(countryDiv);
-        countryDiv.addEventListener('click', (e) => {
-            e.stopPropagation();
-            connectedCountryActions.changeCountry(e.target.closest('div').id);
-        });
+        const countryLi = renderCountryItem(country);
+
         list.append(countryLi);
     });
 };

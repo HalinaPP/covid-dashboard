@@ -1,4 +1,4 @@
-export const createHtmlElement = (tagName, className = '', id = '') => {
+export const createHtmlElement = (tagName, className = '') => {
     const element = document.createElement(tagName);
 
     if (className !== '') {

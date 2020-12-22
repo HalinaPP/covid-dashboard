@@ -20,7 +20,7 @@ const getMapOptions = () => {
 export const renderMapContainer = (mainEl) => {
     const mapEl = createHtmlElement('div');
     mapEl.setAttribute('id', MAP_DIV_ID);
-    mainEl.appendChild(mapEl);
+    mainEl.insertAdjacentElement('afterbegin', mapEl);
     return mapEl;
 };
 
@@ -61,18 +61,30 @@ const changeLegendText = () => {
     legend.innerHTML = getLegendText();
 };
 
-export const loadMap = async (mainEl) => {
-    const mapEl = renderMapContainer(mainEl);
-
+const renderMapElement = async (mapEl) => {
     const map = renderWorldMap(mapEl);
-    map.addLayer(renderWorldMapLayer());
-    renderCountriesPoligonLayer().addTo(map);
 
+    map.addLayer(renderWorldMapLayer());
+
+    renderCountriesPoligonLayer().addTo(map);
     renderScaleControl().addTo(map);
     renderLegendToMap().addTo(map);
+
     mapEl.appendChild(renderFilter());
+};
+
+export const loadMap = async (mainEl) => {
+    const mapEl = renderMapContainer(mainEl);
+    await renderMapElement(mapEl);
+};
+
+const changeCountriesPoligonLayer = () => {
+    const oldMap = document.querySelector(`#${MAP_DIV_ID}`);
+    oldMap.remove();
+    loadMap(document.querySelector('.right-col'));
 };
 
 store.subscribe(() => {
     changeLegendText();
+    changeCountriesPoligonLayer();
 });

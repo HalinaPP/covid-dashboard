@@ -9,13 +9,15 @@ import {
     COLORS_MAP,
     COLORS_MAP_BORDER,
     COUNTRY_HOVER_STYLE,
+    RELATIVE_DIVIDER,
+    RELATIVE_DIVIDER_LEGEND,
+    RELATIVE_DIVIDER_DEATH_LEGEND,
 } from '@/constants/map';
-
+import { RELATIVE } from '@/services/filterTypes';
 import L from 'leaflet';
 import { store } from '@/redux/store';
 import { getCountryInfo, getCountriesInfo } from '@/services/Countries';
 import { changeToCamelCaseString } from '@/helpers/utils';
-import { changeCountry } from '@/redux/actions/countryActions';
 import { connectedCountryActions } from '@/redux/store';
 
 const getDataType = () => {
@@ -40,18 +42,35 @@ const getColorPalite = (type) => {
     return colorName;
 };
 
-export const getLegendText = () => {
-    const type = getDataType();
+const isRelativeValue = (valueType) => {
+    return valueType === RELATIVE;
+};
 
-    const colorName = getColorPalite(type);
-    const amountArr = type === DEATHS ? AMOUNT_PERIOD_DEATH : AMOUNT_PERIOD;
+const getRelativeValue = (value, population) => {
+    return Math.ceil(value / (population / RELATIVE_DIVIDER));
+};
+
+export const getLegendText = () => {
+    const state = store.getState();
+    const { casesType, valueType } = state.country;
+
+    const colorName = getColorPalite(casesType);
+    let amountArr = AMOUNT_PERIOD;
+    let dividerLegend = RELATIVE_DIVIDER_LEGEND;
+    if (casesType === DEATHS) {
+        amountArr = AMOUNT_PERIOD_DEATH;
+        dividerLegend = RELATIVE_DIVIDER_DEATH_LEGEND;
+    }
 
     let text = '';
     amountArr.forEach((item, index) => {
         const className = `${colorName}-i${index + 1}-circle`;
+        const amountRange = isRelativeValue(valueType)
+            ? `${Math.ceil(item[0] / dividerLegend)} - ${Math.ceil(item[1] / dividerLegend)}`
+            : `${item[0]} - ${item[1]}`;
         text += `<div class="legend-item">
                     <span class="${className}"></span>
-                     ${item[0]} - ${item[1]}
+                     ${amountRange}
                 </div>`;
     });
     return text;
@@ -60,14 +79,20 @@ export const getLegendText = () => {
 const getCasesByPeriod = async (countryId) => {
     const countriesInfo = await getCountriesInfo();
 
-    const countryInfo = await getCountryInfo(countryId, countriesInfo);
+    const countryInfo = (await getCountryInfo(countryId, countriesInfo))[0];
 
     const state = store.getState();
-    const type = changeToCamelCaseString(state.country.casesType);
-    const period = changeToCamelCaseString(state.country.period);
 
-    if (countryInfo && countryInfo[0] && countryInfo[0][period] && countryInfo[0][period][type]) {
-        return countryInfo[0][period][type];
+    const { casesType, period, valueType } = state.country;
+    const typeParam = changeToCamelCaseString(casesType);
+    const periodParam = changeToCamelCaseString(period);
+
+    if (countryInfo && countryInfo[periodParam] && countryInfo[periodParam][typeParam]) {
+        const value = countryInfo[periodParam][typeParam];
+        if (isRelativeValue(valueType)) {
+            return getRelativeValue(value, countryInfo.population);
+        }
+        return value;
     }
     return 0;
 };
@@ -109,7 +134,7 @@ const mouseOutFeature = (event) => {
         fillOpacity: 1,
     });
 
-    feature.closePopup();
+    // feature.closePopup();
 };
 
 const handleClick = (event) => {
@@ -119,15 +144,27 @@ const handleClick = (event) => {
 
 const getColorIntensity = async (countryId) => {
     const amountCases = await getCasesByPeriod(countryId);
-    const dataType = getDataType();
 
-    const amountRangeArr = dataType === DEATHS ? AMOUNT_PERIOD_DEATH : AMOUNT_PERIOD;
+    const { valueType, casesType } = store.getState().country;
 
-    const colorNum = amountRangeArr.findIndex(
-        (item) => amountCases >= item[0] && amountCases <= item[1]
-    );
+    let amountRangeArr = AMOUNT_PERIOD;
+    let dividerLegend = RELATIVE_DIVIDER_LEGEND;
+    if (casesType === DEATHS) {
+        dividerLegend = RELATIVE_DIVIDER_DEATH_LEGEND;
+        amountRangeArr = AMOUNT_PERIOD_DEATH;
+    }
 
-    return COLORS_MAP[dataType][colorNum];
+    const colorNum = amountRangeArr.findIndex((item) => {
+        let max = item[1];
+        let min = item[0];
+        if (isRelativeValue(valueType)) {
+            max = Math.ceil(max / dividerLegend);
+            min = Math.ceil(min / dividerLegend);
+        }
+        return amountCases >= min && amountCases <= max;
+    });
+
+    return COLORS_MAP[casesType][colorNum];
 };
 
 export const setPoligonStyleByDataType = async (feature) => {

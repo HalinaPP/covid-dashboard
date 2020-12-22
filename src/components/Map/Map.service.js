@@ -1,6 +1,5 @@
+import { DEATHS, RECOVERY } from '@/constants/constants';
 import {
-    DEATHS,
-    RECOVERY,
     DEATHS_COLOR,
     RECOVERY_COLOR,
     CASES_COLOR,
@@ -11,8 +10,8 @@ import {
     COUNTRY_HOVER_STYLE,
     RELATIVE_DIVIDER,
     RELATIVE_DIVIDER_LEGEND,
-    RELATIVE_DIVIDER_DEATH_LEGEND,
-} from '@/constants/map';
+    RELATIVE_DIVIDER_DEATH_LEGEND
+} from './map';
 import { RELATIVE } from '@/services/filterTypes';
 import L from 'leaflet';
 import { store } from '@/redux/store';
@@ -131,7 +130,7 @@ const mouseOverFeature = (event) => {
 const mouseOutFeature = (event) => {
     const feature = event.target;
     feature.setStyle({
-        fillOpacity: 1,
+        fillOpacity: 1
     });
 
     // feature.closePopup();
@@ -177,7 +176,7 @@ export const setPoligonStyleByDataType = async (feature) => {
         fillColor: color,
         color: borderColor,
         weight: 2,
-        fillOpacity: 1,
+        fillOpacity: 1
     };
 };
 
@@ -187,6 +186,6 @@ export const onEachFeature = async (feature, layer) => {
     layer.on({
         mouseover: mouseOverFeature,
         mouseout: mouseOutFeature,
-        click: handleClick,
+        click: handleClick
     });
 };

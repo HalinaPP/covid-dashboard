@@ -1,10 +1,4 @@
-import {
-    MAP_OPTIONS,
-    MAP_LAYER_OPTIONS,
-    WORLD_MAP_URL,
-    MAP_DIV_ID,
-    LEGEND_TITLE,
-} from '@/constants/map';
+import { MAP_OPTIONS, MAP_LAYER_OPTIONS, WORLD_MAP_URL, MAP_DIV_ID, LEGEND_TITLE } from './map';
 import { createHtmlElement } from '@/helpers/utils';
 import { onEachFeature, getLegendText } from './Map.service';
 import { store } from '@/redux/store';
@@ -30,7 +24,7 @@ const renderWorldMap = (mapEl) => {
 
 const renderCountriesPoligonLayer = () => {
     return new L.GeoJSON(data, {
-        onEachFeature,
+        onEachFeature
     });
 };
 
@@ -50,7 +44,7 @@ export const renderLegendToMap = () => {
 
     const attrOptions = {
         prefix: innerText,
-        position: 'bottomleft',
+        position: 'bottomleft'
     };
 
     return L.control.attribution(attrOptions);

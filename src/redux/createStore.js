@@ -7,7 +7,7 @@ export const applyMiddleware = middleware => {
 			...store,
 			dispatch: function dispatch(action) {
 				return middleware(store)(store.dispatch)(action)
-			},
+			}
 		}
 	}
 }

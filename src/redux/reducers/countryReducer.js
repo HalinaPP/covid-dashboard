@@ -1,6 +1,6 @@
 import { CHANGE_COUNTRY, CHANGE_PERIOD, CHANGE_VALUE_TYPE, CHANGE_CASES_TYPE } from '../types';
 import { ABSOLUTE, ALL_PERIOD } from '@/services/filterTypes';
-import { CASES } from '@/constants/map';
+import { CASES } from '@/constants/constants';
 
 const initialState = {
     activeCountry: 'BLR',

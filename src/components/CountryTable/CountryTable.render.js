@@ -1,4 +1,4 @@
-import { DEATHS, RECOVERY, CASES } from '@/constants/map';
+import { DEATHS, RECOVERY, CASES } from '@/constants/constants';
 import { createHtmlElement } from '@/helpers/utils';
 import { getTableInfo } from './CountryTable.service';
 import { store } from '@/redux/store';

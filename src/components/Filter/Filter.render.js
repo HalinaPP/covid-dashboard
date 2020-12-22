@@ -1,13 +1,20 @@
-import { FILTERS } from '@/constants/filter';
+import { FILTERS } from './filter';
 import { createHtmlElement, replaceStringFormat } from '@/helpers/utils';
-import { filterHandle } from './Filter.service';
+import { filterHandle, getStateFilterTypeValue } from './Filter.service';
 
 const renderOnefilterElement = (filterElement) => {
     const selectEl = createHtmlElement('select', `filter-${filterElement.className}`);
     selectEl.setAttribute('data-type', filterElement.name);
-
+    const stateFilterTypeValue = getStateFilterTypeValue(filterElement.name);
+    console.log('st', stateFilterTypeValue);
     const options = filterElement.options.reduce((prev, curr) => {
-        return prev + `<option value=${curr}>${replaceStringFormat(curr)}</option>`;
+        let selectedValue = '';
+        if (curr === stateFilterTypeValue) {
+            selectedValue = 'selected';
+        }
+        return (
+            prev + `<option value=${curr} ${selectedValue}>${replaceStringFormat(curr)}</option>`
+        );
     }, '');
 
     selectEl.innerHTML = options;

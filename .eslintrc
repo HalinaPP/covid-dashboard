@@ -28,13 +28,14 @@
     "no-plusplus": "off",
     "space-before-function-paren": 0,
     "eol-last": "off",
-    "comma-dangle": 0,
+    "comma-dangle": 1,
+    "trailing-comma": [true, {"multiline": "always", "singleline": "never"}],
 
     "quotes": ["error", "single"],
     "no-underscore-dangle": "off",
 
     "max-len": ["error", 250, 2, { "ignoreUrls": true }],
-    "no-console": "off",
+    "no-console": 0,
     "no-alert": "error",
 
     "no-param-reassign": "off",

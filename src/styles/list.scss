@@ -1,7 +1,48 @@
-.countries-list{
+.countries-list-wrapper{
+  background: $primary-color-light;
+  padding: 5px;
   @include border;
   @include shadow;
   @include flex(column);
+  flex: 0 0 auto;
+  margin: 1rem;
+  height: 35rem;
+}
+.list--search-wrapper{
+  width: 100%;
+  @include border;
+  @include shadow;
+  @include flex(row,space-between, center);
+  height: 10%;
+  flex: 0 0 auto;
+  margin-bottom: 5px;
+}
+.countries-list-container{
+  height: 80%;
+  overflow: auto;
+  @include border;
+  @include shadow;
+  @include flex(column,flex-start,center);
   flex: 1 0 auto;
-  margin: 10px;
+  width: 100%;
+  display: flex;
+  margin-bottom: 0.5rem;
+}
+.countries-list{
+  width: 100%;
+  li{
+    padding-bottom: 0.5rem;
+    margin: 0.5rem;
+    border-bottom: solid 2px black;
+    div{
+      @include flex(row,start,center);
+      span{
+        margin-left: 0.5rem;
+      }
+      &:hover{
+        cursor: pointer;
+        background: $primary-color;
+      }
+    }
+  }
 }

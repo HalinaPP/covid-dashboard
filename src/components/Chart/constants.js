@@ -1,6 +1,6 @@
 import color from '@/styles/colors.scss';
 
-export const PRIMARY_COLOR = '#a9c7ea';
+export const PRIMARY_COLOR = '#C2D9F4';
 export const SECOND_COLOR = '#000';
 export const GRAPHIC_COLOR = '#376398';
 export const CHART_DIV_ID = 'chart';

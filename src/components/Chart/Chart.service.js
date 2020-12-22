@@ -29,6 +29,7 @@ export async function getChartInfo() {
     const countryPop = countries.find(
         (item) => item.id === countryName || item.name === countryName
     );
+    console.log(countryPop);
     const population = countryPop.population;
     const response = await fetch(GET_COUNTRY_HISTORY_URL_BY_NAME(countryName));
     const responseData = await response.json();

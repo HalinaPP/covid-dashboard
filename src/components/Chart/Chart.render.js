@@ -39,7 +39,7 @@ const renderCovidChart = () => {
         id: CHART_DIV_ID,
         data: myConfig,
         width: '100%',
-        height: 200,
+        height: 150,
     });
 };
 

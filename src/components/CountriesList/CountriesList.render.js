@@ -1,14 +1,21 @@
 import { createHtmlElement } from '@/helpers/utils';
-import { setCountries } from '@/components/CountriesList/CountriesList.service';
+import { doSearch, setCountries } from '@/components/CountriesList/CountriesList.service';
 
 const renderInfoContainer = (listEl) => {
     const filterBlock = createHtmlElement('div', 'list--search-wrapper');
-    const search = createHtmlElement('div', 'list--search-search');
-    search.innerHTML = 'search';
+    const search = createHtmlElement('input', 'list--search-search');
     const filter = createHtmlElement('div', 'list--search-filter');
+
+    search.placeholder = 'Search';
     filter.innerHTML = 'filter';
+
+    search.addEventListener('keyup', () => {
+        doSearch();
+    });
+
     filterBlock.appendChild(search);
     filterBlock.appendChild(filter);
+
     listEl.appendChild(filterBlock);
     return filterBlock;
 };
@@ -31,5 +38,4 @@ export const renderCountriesList = (mainEl) => {
     const wrapper = renderTableWrapperContainer(mainEl);
     renderInfoContainer(wrapper);
     renderTableContainer(wrapper);
-    setCountries();
 };

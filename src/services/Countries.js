@@ -41,10 +41,8 @@ function getAllCountyriesInfo() {
     let cachedInfo = [];
     return async () => {
         if (cachedInfo.length > 0) {
-            console.log(1);
             return cachedInfo;
         }
-        console.log(2);
         const responseCountries = await fetch(GET_ALL_COUNTRIES_URL);
         const coundtryData = await responseCountries.json();
         cachedInfo = await generateCountryArr(coundtryData);

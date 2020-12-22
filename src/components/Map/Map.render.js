@@ -3,7 +3,7 @@ import {
     MAP_LAYER_OPTIONS,
     WORLD_MAP_URL,
     MAP_DIV_ID,
-    LEGEND_TITLE
+    LEGEND_TITLE,
 } from '@/constants/map';
 import { createHtmlElement } from '@/helpers/utils';
 import { onEachFeature, getLegendText } from './Map.service';
@@ -19,7 +19,7 @@ const getMapOptions = () => {
 export const renderMapContainer = (mainEl) => {
     const mapEl = createHtmlElement('div');
     mapEl.setAttribute('id', MAP_DIV_ID);
-    mainEl.appendChild(mapEl);
+    mainEl.prepend(mapEl);
     return mapEl;
 };
 
@@ -29,7 +29,7 @@ const renderWorldMap = (mapEl) => {
 
 const renderCountriesPoligonLayer = () => {
     return new L.GeoJSON(data, {
-        onEachFeature
+        onEachFeature,
     });
 };
 
@@ -49,7 +49,7 @@ export const renderLegendToMap = () => {
 
     const attrOptions = {
         prefix: innerText,
-        position: 'bottomleft'
+        position: 'bottomleft',
     };
 
     return L.control.attribution(attrOptions);

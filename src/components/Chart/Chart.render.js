@@ -48,7 +48,5 @@ export const renderChart = (mainEl) => {
     const infoContainer = renderInfoContainer(wrapper);
     const chart = renderChartContainer(wrapper);
     renderCovidChart();
-    setChartData();
-    setInfoContainer();
     return chart;
 };

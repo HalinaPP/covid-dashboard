@@ -4,9 +4,9 @@ import { renderCountryTable } from '../CountryTable/CountryTable.render';
 import { renderChart } from '../Chart/Chart.render';
 import { renderCountriesList } from '../CountriesList/CountriesList.render';
 import { getCountriesInfo } from '@/services/Countries';
+import { connectedCountryActions, store } from '@/redux/store';
 
 export const renderMainContent = async () => {
-    await getCountriesInfo();
     const mainEl = createHtmlElement('main', 'main');
     document.body.appendChild(mainEl);
 
@@ -18,9 +18,8 @@ export const renderMainContent = async () => {
 
     renderCountriesList(leftCol);
     renderCountryTable(leftCol);
-
-    loadMap(rightCol);
     renderChart(rightCol);
-
+    await getCountriesInfo();
+    loadMap(rightCol);
     return mainEl;
 };

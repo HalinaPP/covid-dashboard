@@ -10,12 +10,28 @@
 }
 .list--search-wrapper{
   width: 100%;
-  @include border;
-  @include shadow;
   @include flex(row,space-between, center);
   height: 10%;
   flex: 0 0 auto;
   margin-bottom: 5px;
+}
+.list--search-search{
+  @include flex(row,space-between, center);
+  flex: 1 0 80%;
+  @include border;
+  @include shadow;
+  height: 100%;
+  padding-left: 0.5rem;
+  background: transparent;
+}
+.list--search-filter{
+  height: 100%;
+  padding-left: 0.5rem;
+  @include flex(row,space-between, center);
+  flex: 0 0 18%;
+  margin-left: 5px;
+  @include border;
+  @include shadow;
 }
 .countries-list-container{
   height: 80%;
@@ -45,4 +61,19 @@
       }
     }
   }
+  .active{
+    background: $primary-color-light;
+    opacity: 0.5;
+    div{
+      &:hover{
+        cursor: default;
+        background: $primary-color-light;
+      }
+    }
+  }
 }
+
+.hidden{
+  display: none;
+}
+

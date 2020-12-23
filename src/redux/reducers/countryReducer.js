@@ -3,7 +3,7 @@ import { ABSOLUTE, ALL_PERIOD } from '@/services/filterTypes';
 import { CASES } from '@/constants/constants';
 
 const initialState = {
-    activeCountry: 'BLR',
+    activeCountry: 'all',
     period: ALL_PERIOD,
     valueType: ABSOLUTE,
     casesType: CASES,

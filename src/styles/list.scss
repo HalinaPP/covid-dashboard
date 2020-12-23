@@ -1,5 +1,5 @@
 .countries-list-wrapper{
-  position: relative;
+  position: relative ;
   background: $primary-color-light;
   padding: 5px;
   @include border;
@@ -31,6 +31,7 @@
   background: transparent;
 }
 .list--search-filter{
+  position: static !important;
   height: 100%;
   padding-left: 0.5rem;
   @include flex(row,space-between, center);

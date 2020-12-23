@@ -3,10 +3,13 @@ import { renderFavicon } from '@/helpers/utils';
 import { renderHeader } from '../Header/Header.render';
 import { renderFooter } from '../Footer/Footer.render';
 import { renderMainContent } from '../Main/Main.render';
+import { getCountriesInfo } from '@/services/Countries';
+import { store } from '@/redux/store';
 
-export const renderPage = () => {
+export const renderPage = async () => {
     renderFavicon(FAVICON_URL);
     document.body.append(renderHeader());
-    renderMainContent();
+    await renderMainContent();
     document.body.append(renderFooter());
+    store.dispatch({}, { type: '__INIT__' });
 };

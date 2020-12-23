@@ -39,7 +39,7 @@ const renderCovidChart = () => {
         id: CHART_DIV_ID,
         data: myConfig,
         width: '100%',
-        height: 100
+        height: 150,
     });
 };
 
@@ -48,7 +48,5 @@ export const renderChart = (mainEl) => {
     const infoContainer = renderInfoContainer(wrapper);
     const chart = renderChartContainer(wrapper);
     renderCovidChart();
-    setChartData();
-    setInfoContainer();
     return chart;
 };

@@ -1,7 +1,7 @@
 import { connectedCountryActions, store } from '@/redux/store';
 import { getCountriesInfo, getMapinfo } from '@/services/Countries';
 import { ALL_PERIOD, LAST_DAY } from '@/services/filterTypes';
-import { CASES, DEATHS, RECOVERY } from '@/constants/constants';
+import { CASES, DEATHS, RECOVERY, WORLD_ID, WORLD_NAME } from '@/constants/constants';
 import { createHtmlElement, getCasesColor } from '@/helpers/utils';
 import { WORLD_IMG_URL } from '@/components/Chart/constants';
 import { renderFilter, renderOnefilterElement } from '@/components/Filter/Filter.render';
@@ -45,9 +45,9 @@ function renderCountryItem(country) {
     countryDiv.id = country.id;
     countryDiv.innerHTML = `
             <img src="${
-                country.name !== 'all' ? country.flag : WORLD_IMG_URL
+                country.name !== WORLD_ID ? country.flag : WORLD_IMG_URL
             }" width="35" height="25" alt="flag">
-            <span id="name"  >${country.name !== 'all' ? country.name : 'World'}</span>
+            <span id="name"  >${country.name !== WORLD_ID ? country.name : WORLD_NAME}</span>
             <span style="color: ${getCasesColor()}"> ${country.cases}</span>
             `;
     countryLi.append(countryDiv);

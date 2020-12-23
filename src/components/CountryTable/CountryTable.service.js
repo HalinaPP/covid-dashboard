@@ -1,6 +1,6 @@
 import { getMapinfo } from '@/services/Countries';
 import { store } from '@/redux/store';
-import { CASES, DEATHS, RECOVERY } from '@/constants/constants';
+import { CASES, DEATHS, RECOVERY, WORLD_ID, WORLD_NAME } from '@/constants/constants';
 import { doSearch, setCountries } from '@/components/CountriesList/CountriesList.service';
 import { renderFilter } from '@/components/Filter/Filter.render';
 
@@ -16,7 +16,7 @@ export const setTableInfo = async () => {
     const info = await getTableInfo();
     const { countryName, casesValueAmount } = info;
     wrapper.innerHTML = `<div class="country-data-wrapper"><h3>${
-        countryName !== 'all' ? countryName : 'World'
+        countryName !== WORLD_ID ? countryName : WORLD_NAME
     }</h3>
                         <div class="country-data-table-header">
                             <div>${CASES}</div>

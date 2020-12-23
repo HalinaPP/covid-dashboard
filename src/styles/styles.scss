@@ -1,5 +1,6 @@
 @import './colors.scss';
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Varela+Round');
 @mixin clearfix() {
     &:before,
     &:after {
@@ -122,6 +123,8 @@ footer {
     }
 }
 
+
+
 @media screen and (max-width: 768px) {
     main {
         flex-wrap: wrap;
@@ -146,4 +149,15 @@ footer {
 @import 'table';
 @import 'list';
 @import 'filter';
+@import "fullscreen";
+.fullscreen{
+    position: absolute;
+    left: 3px;
+    top: 5px;
+    width: 99%;
+    height: 99%;
+    z-index: 2000;
+    margin: 0;
+
+}
 @import 'virtualKeyboard';

@@ -2,6 +2,7 @@ const ICON_PATH = './assets/icons';
 const FAVICON_URL = `${ICON_PATH}/favicon.ico`;
 const TITLE = 'Covid-19 dashbord';
 export const WORLD_ID = 'all';
+export const FULL_SCREEN = 'https://img.icons8.com/metro/26/000000/fit-to-width.png';
 export const WORLD_NAME = 'World';
 const IMAGES = {
     rsLogo: `${ICON_PATH}/rs_school_js.svg`,

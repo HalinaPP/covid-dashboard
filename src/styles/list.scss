@@ -1,4 +1,5 @@
 .countries-list-wrapper{
+  position: relative;
   background: $primary-color-light;
   padding: 5px;
   @include border;

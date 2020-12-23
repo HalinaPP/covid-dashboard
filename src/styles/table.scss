@@ -1,4 +1,5 @@
 .country-data-table {
+    position: relative;
     @include border;
     @include shadow;
     @include flex(column, flex-start);

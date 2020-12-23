@@ -1,6 +1,9 @@
 import { getMapinfo } from '@/services/Countries';
 import { store } from '@/redux/store';
+
 import { CASES, DEATHS, FULL_SCREEN, RECOVERY, WORLD_ID, WORLD_NAME } from '@/constants/constants';
+
+
 import { renderFilter } from '@/components/Filter/Filter.render';
 import { createHtmlElement } from '@/helpers/utils';
 

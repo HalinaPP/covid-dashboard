@@ -38,6 +38,10 @@ export const replaceStringFormat = (str) => {
     return arr;
 };
 
+export const createIconHTML = (iconName) => {
+    return `<i class="material-icons">${iconName}</i>`;
+};
+
 export function getCasesColor() {
     const state = store.getState();
     switch (state.country.casesType) {

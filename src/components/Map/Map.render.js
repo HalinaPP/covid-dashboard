@@ -13,12 +13,12 @@ const getMapOptions = () => {
 };
 
 const renderWorldMap = (mapEl) => {
-    return new L.Map(mapEl, getMapOptions()).setView([40, 0], 2);
+    return new L.Map(mapEl, getMapOptions());
 };
 
 const renderCountriesPoligonLayer = () => {
     return new L.GeoJSON(data, {
-        onEachFeature,
+        onEachFeature
     });
 };
 
@@ -40,7 +40,7 @@ const getLegendPrefix = () => {
 export const renderLegendToMap = () => {
     const attrOptions = {
         prefix: getLegendPrefix(),
-        position: 'bottomleft',
+        position: 'bottomleft'
     };
 
     return L.control.attribution(attrOptions);

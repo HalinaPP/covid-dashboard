@@ -111,6 +111,7 @@ store.subscribe(async () => {
         const section = document.querySelector('#map');
         section.style.margin = section.style.position === 'absolute' ? '1rem' : 0;
         section.style.position = section.style.position === 'absolute' ? 'relative' : 'absolute';
+        section.style.height = section.style.position === 'absolute' ? '100%' : 'auto';
 
         section.classList.toggle('fullscreen');
         document.body.classList.toggle('no-scroll');

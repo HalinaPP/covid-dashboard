@@ -24,6 +24,7 @@
     }
     .country-data-wrapper{
         margin: 2%;
+        margin-top: 0px;
         @include flex(column,flex-start,flex-start);
         row-gap: 1rem;
         align-self: center;

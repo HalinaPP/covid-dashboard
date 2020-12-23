@@ -1,5 +1,6 @@
 import { shiftButtonVariant, KEYS, KEY_PRESS_COLOR, KEY_PRESS_BG_COLOR } from './constants';
 import { createIconHTML } from '@/helpers/utils';
+import { doSearch } from '@/components/CountriesList/CountriesList.service';
 
 export const keyboardState = {
     properties: {
@@ -226,6 +227,7 @@ const clickElement = (event) => {
     } else {
         otherKeyHandle(element);
     }
+    doSearch();
 };
 
 export const handleKeyElement = (element) => {

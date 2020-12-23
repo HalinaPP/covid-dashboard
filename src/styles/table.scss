@@ -3,7 +3,6 @@
     @include shadow;
     @include flex(column, flex-start);
     background: $primary-color-light;
-    row-gap: 2rem;
     margin: 10px;
     flex: 1 0 auto;
 
@@ -22,7 +21,10 @@
             width: 30%;
         }
     }
-
+    .country-data-wrapper{
+        @include flex(column);
+        row-gap: 1rem;
+    }
     .filter{
         position: unset;
         align-self: flex-end;

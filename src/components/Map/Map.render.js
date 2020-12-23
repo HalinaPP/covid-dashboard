@@ -61,7 +61,6 @@ export const renderMapContainer = (mainEl) => {
     mapEl.setAttribute('id', MAP_DIV_ID);
     mainEl.insertAdjacentElement('afterbegin', mapEl);
 
-    mapEl.appendChild(renderFilter());
     renderMapElement(mapEl);
     return mapEl;
 };
@@ -74,5 +73,7 @@ export const loadMap = async () => {
 };
 
 store.subscribe(() => {
+    const mapEl = document.body.querySelector(`#${MAP_DIV_ID}`);
+    mapEl.appendChild(renderFilter());
     loadMap();
 });

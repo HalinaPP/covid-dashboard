@@ -1,3 +1,7 @@
+import { store } from '@/redux/store';
+import { CASES, DEATHS, RECOVERY } from '@/constants/constants';
+import { CASES_COLOR, DEATHS_COLOR, RECOVERY_COLOR } from '@/components/Map/map';
+
 export const createHtmlElement = (tagName, className = '') => {
     const element = document.createElement(tagName);
 
@@ -37,3 +41,18 @@ export const replaceStringFormat = (str) => {
 export const createIconHTML = (iconName) => {
     return `<i class="material-icons">${iconName}</i>`;
 };
+
+export function getCasesColor() {
+    const state = store.getState();
+    switch (state.country.casesType) {
+        case CASES:
+            return CASES_COLOR;
+        case DEATHS:
+            return DEATHS_COLOR;
+        case RECOVERY:
+            return RECOVERY_COLOR;
+        default:
+            break;
+    }
+    return null;
+}

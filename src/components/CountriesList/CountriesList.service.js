@@ -1,9 +1,11 @@
 import { connectedCountryActions, store } from '@/redux/store';
 import { getCountriesInfo, getMapinfo } from '@/services/Countries';
 import { ALL_PERIOD, LAST_DAY } from '@/services/filterTypes';
-import { CASES, DEATHS, RECOVERY } from '@/constants/constants';
-import { createHtmlElement } from '@/helpers/utils';
+import { CASES, DEATHS, RECOVERY, WORLD_ID, WORLD_NAME } from '@/constants/constants';
+import { createHtmlElement, getCasesColor } from '@/helpers/utils';
 import { WORLD_IMG_URL } from '@/components/Chart/constants';
+import { renderFilter, renderOnefilterElement } from '@/components/Filter/Filter.render';
+import { FILTERS } from '@/components/Filter/filter';
 
 async function getCountries() {
     const state = store.getState();
@@ -43,10 +45,10 @@ function renderCountryItem(country) {
     countryDiv.id = country.id;
     countryDiv.innerHTML = `
             <img src="${
-                country.name !== 'all' ? country.flag : WORLD_IMG_URL
+                country.name !== WORLD_ID ? country.flag : WORLD_IMG_URL
             }" width="35" height="25" alt="flag">
-            <span id="name">${country.name !== 'all' ? country.name : 'World'}</span>
-            <span> ${country.cases}</span>
+            <span id="name"  >${country.name !== WORLD_ID ? country.name : WORLD_NAME}</span>
+            <span style="color: ${getCasesColor()}"> ${country.cases}</span>
             `;
     countryLi.append(countryDiv);
     countryDiv.addEventListener('click', (e) => {
@@ -58,17 +60,32 @@ function renderCountryItem(country) {
     return countryLi;
 }
 
+const setFilter = () => {
+    const filterWrap = document.querySelector('.list--search-filter');
+    const cases = FILTERS.find((item) => item.name === 'CasesType');
+    filterWrap.innerHTML = '';
+    filterWrap.appendChild(renderOnefilterElement(cases));
+};
+
 export const setCountries = async () => {
     const list = document.querySelector('.countries-list');
     const state = store.getState().country;
     let selectedCountry = null;
     list.innerHTML = '';
     const countries = await getCountries();
+
+    countries.sort((a, b) => {
+        if (a && b) {
+            return b.cases - a.cases;
+        }
+        return 0;
+    });
+
     countries.forEach((country) => {
         if (!country) {
             return;
         }
-        const countryLi = renderCountryItem(country);
+        const countryLi = renderCountryItem(country, state);
         if (state.activeCountry === country.id) {
             selectedCountry = countryLi;
         } else {
@@ -93,7 +110,8 @@ export const doSearch = () => {
     }
 };
 
-store.subscribe(() => {
-    setCountries();
+store.subscribe(async () => {
+    setFilter();
+    await setCountries();
     doSearch();
 });

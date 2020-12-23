@@ -6,7 +6,6 @@ import { setTableInfo } from './CountryTable.service';
 export const renderCountryTable = (mainEl) => {
     const table = createHtmlElement('div', 'country-data-table');
     mainEl.appendChild(table);
-    table.appendChild(renderFilter());
     return table;
 };
 

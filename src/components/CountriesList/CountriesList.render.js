@@ -5,7 +5,7 @@ import { openKeyboard } from '@/components/Keyboard/Keyboard.service';
 
 const renderInfoContainer = (listEl) => {
     const filterBlock = createHtmlElement('div', 'list--search-wrapper');
-    const filter = createHtmlElement('div', 'list--search-filter');
+    const filter = createHtmlElement('div', 'list--search-filter filter');
     filter.innerHTML = 'filter';
 
     const search = createHtmlElement('input', 'list--search-search');
@@ -17,9 +17,7 @@ const renderInfoContainer = (listEl) => {
     search.placeholder = 'Search';
     search.setAttribute('id', 'inputText');
     search.addEventListener('click', () => openKeyboard());
-    search.addEventListener('keyup', () => {
-        doSearch();
-    });
+    search.addEventListener('keyup', () => doSearch());
 
     filterBlock.append(search, keyboardIcon, filter);
 
@@ -43,7 +41,6 @@ const renderTableWrapperContainer = (mainEl) => {
 
 export const renderCountriesList = (mainEl) => {
     const wrapper = renderTableWrapperContainer(mainEl);
-    wrapper.appendChild(renderFilter());
     renderInfoContainer(wrapper);
     renderTableContainer(wrapper);
 };

@@ -15,7 +15,7 @@ import { createHtmlElement, getCasesColor } from '@/helpers/utils';
 import { renderFilter } from '@/components/Filter/Filter.render';
 
 function countCountryRelativeOneHundred(casesValue, population) {
-    return Math.round(casesValue / (population / 100000));
+    return Math.round((casesValue * 100000) / population);
 }
 
 export async function getChartInfo() {

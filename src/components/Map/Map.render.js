@@ -1,4 +1,12 @@
-import { MAP_OPTIONS, MAP_LAYER_OPTIONS, WORLD_MAP_URL, MAP_DIV_ID, LEGEND_TITLE } from './map';
+import {
+    MAP_OPTIONS,
+    MAP_LAYER_OPTIONS,
+    WORLD_MAP_URL,
+    MAP_DIV_ID,
+    LEGEND_TITLE,
+    RELATIVE_AMOUNT_LEGEND
+} from './map';
+import { RELATIVE } from '@/services/filterTypes';
 import { createHtmlElement } from '@/helpers/utils';
 import { onEachFeature, getLegendText } from './Map.service';
 import { store } from '@/redux/store';
@@ -31,8 +39,13 @@ const renderWorldMapLayer = () => {
 };
 
 const getLegendPrefix = () => {
+    const state = store.getState().country;
+    const type = state.casesType;
+    const additionalHeader =
+        state.valueType === RELATIVE ? `<div>${RELATIVE_AMOUNT_LEGEND}</div>` : '';
     return `<div class="legend">
-                ${LEGEND_TITLE}
+                <h3>${LEGEND_TITLE} ${type} ${additionalHeader}</h3>
+
                 <div class="legend-info">${getLegendText()}</div>
             </div>`;
 };
@@ -78,7 +91,6 @@ export const loadMap = async () => {
 store.subscribe(() => {
     const mapEl = document.body.querySelector(`#${MAP_DIV_ID}`);
     mapEl.appendChild(renderFilter());
-
     const fullscreenBtn = createHtmlElement('div', 'full-screen');
     fullscreenBtn.innerHTML = `<img width="15" height="15" src=${FULL_SCREEN} alt="fullscreen"/>`;
     fullscreenBtn.addEventListener('click', (e) => {

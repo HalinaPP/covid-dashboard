@@ -50,7 +50,8 @@ const MAP_OPTIONS = {
 const DEATHS_COLOR = 'black';
 const RECOVERY_COLOR = 'green';
 const CASES_COLOR = 'red';
-const LEGEND_TITLE = '<h3>Color range of cases:</h3>';
+const LEGEND_TITLE = 'Color range of ';
+const RELATIVE_AMOUNT_LEGEND = 'per 100k of population';
 const RELATIVE_DIVIDER = 100000;
 const RELATIVE_DIVIDER_LEGEND = 500;
 const RELATIVE_DIVIDER_DEATH_LEGEND = 100;
@@ -71,5 +72,6 @@ export {
     COUNTRY_HOVER_STYLE,
     RELATIVE_DIVIDER,
     RELATIVE_DIVIDER_LEGEND,
-    RELATIVE_DIVIDER_DEATH_LEGEND
+    RELATIVE_DIVIDER_DEATH_LEGEND,
+    RELATIVE_AMOUNT_LEGEND
 };

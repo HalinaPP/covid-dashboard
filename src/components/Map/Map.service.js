@@ -113,15 +113,19 @@ const createPopup = async (feature) => {
                             </div>
                         </div>
                         `;
-
-    feature.bindPopup(`${popupText}`).openPopup();
+    const popupOptions = {
+        autoPanPaddingTopLeft: L.point(0, 0),
+        className: 'custom-popup'
+    };
+    feature.bindPopup(`${popupText}`, popupOptions).openPopup();
 };
 
 const mouseOverFeature = (event) => {
     const feature = event.target;
-    createPopup(feature);
 
     feature.setStyle(COUNTRY_HOVER_STYLE);
+
+    createPopup(feature);
     if (!L.Browser.ie && !L.Browser.opera) {
         feature.bringToFront();
     }
@@ -185,7 +189,7 @@ export const onEachFeature = async (feature, layer) => {
     layer.setStyle(styleF);
     layer.on({
         mouseover: mouseOverFeature,
-        mouseout: mouseOutFeature,
+        mouseleave: mouseOutFeature,
         click: handleClick
     });
 };

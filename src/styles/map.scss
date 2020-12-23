@@ -31,6 +31,22 @@
     @include shadow;
 }
 
+.custom-popup{
+
+    .leaflet-popup-content-wrapper{
+        @include border;
+        @include shadow;
+        background: #C2D9F4;
+    }
+
+    .leaflet-popup-tip-container{
+        display:none
+    }
+
+    .leaflet-popup-close-button{
+        color:#09294e;
+    }
+}
 .popup-country-title {
     font-size: 1.4rem;
     span {

@@ -5,10 +5,9 @@ import { renderFilter } from '../Filter/Filter.render';
 const renderInfoContainer = (listEl) => {
     const filterBlock = createHtmlElement('div', 'list--search-wrapper');
     const search = createHtmlElement('input', 'list--search-search');
-    const filter = createHtmlElement('div', 'list--search-filter');
+    const filter = createHtmlElement('div', 'list--search-filter filter');
 
     search.placeholder = 'Search';
-    filter.innerHTML = 'filter';
 
     search.addEventListener('keyup', () => {
         doSearch();
@@ -37,7 +36,6 @@ const renderTableWrapperContainer = (mainEl) => {
 
 export const renderCountriesList = (mainEl) => {
     const wrapper = renderTableWrapperContainer(mainEl);
-    wrapper.appendChild(renderFilter());
     renderInfoContainer(wrapper);
     renderTableContainer(wrapper);
 };

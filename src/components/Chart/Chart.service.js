@@ -3,6 +3,7 @@ import {
     CHART_DIV_ID,
     GET_COUNTRY_HISTORY_URL_BY_NAME,
     GRAPHIC_COLOR,
+    PRIMARY_COLOR,
     secondColor,
 } from '@/components/Chart/constants';
 import { store } from '@/redux/store';
@@ -10,7 +11,8 @@ import { CASES, DEATHS, RECOVERY } from '@/constants/constants';
 import { CASES_COLOR, DEATHS_COLOR, RECOVERY_COLOR } from '@/components/Map/map';
 import { ABSOLUTE, ALL_PERIOD, LAST_DAY, RELATIVE } from '@/services/filterTypes';
 import { getCountriesInfo } from '@/services/Countries';
-import { createHtmlElement } from '@/helpers/utils';
+import { createHtmlElement, getCasesColor } from '@/helpers/utils';
+import { renderFilter } from '@/components/Filter/Filter.render';
 
 function countCountryRelativeOneHundred(casesValue, population) {
     return Math.round(casesValue / (population / 100000));
@@ -32,8 +34,10 @@ export async function getChartInfo() {
     );
     const population = countryPop.population;
     const response = await fetch(GET_COUNTRY_HISTORY_URL_BY_NAME(countryName));
+    if (response.status === 404) {
+        return null;
+    }
     const responseData = await response.json();
-
     switch (state.country.casesType) {
         case CASES:
             result.casesType = CASES;
@@ -84,49 +88,61 @@ export async function getChartInfo() {
     return result;
 }
 
-function getGraphicColor() {
-    const state = store.getState();
-    switch (state.country.casesType) {
-        case CASES:
-            return CASES_COLOR;
-        case DEATHS:
-            return DEATHS_COLOR;
-        case RECOVERY:
-            return RECOVERY_COLOR;
-        default:
-            break;
-    }
-    return null;
-}
-
 export const setChartData = async () => {
     const jsonData = await getChartInfo();
-    // set
-    zingchart.exec(CHART_DIV_ID, 'modify', {
-        data: {
-            series: [
-                {
-                    type: 'bar',
-                    text: jsonData.casesType,
-                    values: jsonData.casesCount,
-                    backgroundColor: getGraphicColor(),
-                    scales: 'scale-x,scale-y',
+    if (jsonData !== null) {
+        zingchart.exec(CHART_DIV_ID, 'modify', {
+            data: {
+                series: [
+                    {
+                        type: 'bar',
+                        text: jsonData.casesType,
+                        values: jsonData.casesCount,
+                        backgroundColor: getCasesColor(),
+                        scales: 'scale-x,scale-y',
+                    },
+                ],
+                scaleY: {
+                    items: jsonData.casesCount,
+                    'min-value': 0,
                 },
-            ],
-            scaleY: {
-                items: jsonData.casesCount,
-                'min-value': 0,
+                scaleX: {
+                    labels: jsonData.timeLine,
+                },
             },
-            scaleX: {
-                labels: jsonData.timeLine,
+        });
+    } else {
+        zingchart.exec(CHART_DIV_ID, 'modify', {
+            data: {
+                noData: {
+                    text: 'Data not found',
+                    backgroundColor: PRIMARY_COLOR,
+                },
+                series: [
+                    {
+                        values: [],
+                    },
+                ],
             },
-        },
-    });
+        });
+    }
 };
 
-export const setInfoContainer = () => {
+async function getCountryName(countryId) {
+    const countries = await getCountriesInfo();
+    return countries.find((country) => country.id === countryId).name;
+}
+
+export const setInfoContainer = async () => {
+    const wrapper = document.body.querySelector('.chart--info');
+    const filter = wrapper.querySelector('.filter');
     const countryName = document.body.querySelector('.chart--info-country');
-    countryName.innerHTML = store.getState().country.activeCountry;
+    if (filter) {
+        filter.remove();
+    }
+    wrapper.appendChild(renderFilter());
+    const name = await getCountryName(store.getState().country.activeCountry);
+    countryName.innerHTML = name;
 };
 
 store.subscribe(() => {

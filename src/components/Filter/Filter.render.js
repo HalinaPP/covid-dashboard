@@ -5,8 +5,9 @@ import { filterHandle, getStateFilterTypeValue } from './Filter.service';
 const renderOnefilterElement = (filterElement) => {
     const selectEl = createHtmlElement('select', `filter-${filterElement.className}`);
     selectEl.setAttribute('data-type', filterElement.name);
+
     const stateFilterTypeValue = getStateFilterTypeValue(filterElement.name);
-    console.log('st', stateFilterTypeValue);
+
     const options = filterElement.options.reduce((prev, curr) => {
         let selectedValue = '';
         if (curr === stateFilterTypeValue) {

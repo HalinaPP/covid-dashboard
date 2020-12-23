@@ -5,6 +5,7 @@ import { setChartData } from './Chart.service';
 import { myConfig, ONE_HUNDRED, ONE_MILLION } from '@/components/Chart/constants';
 import { setInfoContainer } from '@/components/Chart/Chart.service';
 zingchart.ASYNC = true;
+import { renderFilter } from '../Filter/Filter.render';
 
 window.formatChartAxis = (v) => {
     let formattingLabel = v;
@@ -39,12 +40,13 @@ const renderCovidChart = () => {
         id: CHART_DIV_ID,
         data: myConfig,
         width: '100%',
-        height: 150,
+        height: 150
     });
 };
 
 export const renderChart = (mainEl) => {
     const wrapper = renderChartWrapperContainer(mainEl);
+    wrapper.appendChild(renderFilter());
     const infoContainer = renderInfoContainer(wrapper);
     const chart = renderChartContainer(wrapper);
     renderCovidChart();

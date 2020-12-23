@@ -29,7 +29,7 @@
     "space-before-function-paren": 0,
     "eol-last": "off",
     "comma-dangle": 0,
-    "trailing-comma": 1,
+
 
 
     "quotes": ["error", "single"],

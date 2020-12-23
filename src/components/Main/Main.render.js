@@ -19,8 +19,7 @@ export const renderMainContent = async () => {
     renderCountryTable(leftCol);
 
     renderChart(rightCol);
-    await getCountriesInfo();
     renderMapContainer(rightCol);
-
+    await getCountriesInfo();
     return mainEl;
 };

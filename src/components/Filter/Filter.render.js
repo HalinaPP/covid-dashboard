@@ -2,7 +2,7 @@ import { FILTERS } from './filter';
 import { createHtmlElement, replaceStringFormat } from '@/helpers/utils';
 import { filterHandle, getStateFilterTypeValue } from './Filter.service';
 
-const renderOnefilterElement = (filterElement) => {
+export const renderOnefilterElement = (filterElement) => {
     const selectEl = createHtmlElement('select', `filter-${filterElement.className}`);
     selectEl.setAttribute('data-type', filterElement.name);
 

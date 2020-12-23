@@ -1,9 +1,10 @@
 const ICON_PATH = './assets/icons';
 const FAVICON_URL = `${ICON_PATH}/favicon.ico`;
 const TITLE = 'Covid-19 dashbord';
-
+export const WORLD_ID = 'all';
+export const WORLD_NAME = 'World';
 const IMAGES = {
-    rsLogo: `${ICON_PATH}/rs_school_js.svg`
+    rsLogo: `${ICON_PATH}/rs_school_js.svg`,
 };
 const FOOTER_COPYRIGHT_DEVELOPERS = `<span><a href='https://github.com/Arcuman'>@arcuman</a> & <a href='https://github.com/HalinaPP'>
                              @halinapp
@@ -24,5 +25,5 @@ export {
     FAVICON_URL,
     DEATHS,
     RECOVERY,
-    CASES
+    CASES,
 };

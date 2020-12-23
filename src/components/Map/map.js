@@ -30,7 +30,7 @@ const COUNTRY_HOVER_STYLE = {
 const MAP_DIV_ID = 'map';
 const WORLD_MAP_URL =
     'https://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}';
-const MAP_CENTER = [17.385044, 78.486671];
+const MAP_CENTER = [50.385044, 30.486671];
 
 const MAP_LAYER_OPTIONS = {
     attribution: '',

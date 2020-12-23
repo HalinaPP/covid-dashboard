@@ -1,7 +1,6 @@
 import { getMapinfo } from '@/services/Countries';
 import { store } from '@/redux/store';
 import { CASES, DEATHS, RECOVERY, WORLD_ID, WORLD_NAME } from '@/constants/constants';
-import { doSearch, setCountries } from '@/components/CountriesList/CountriesList.service';
 import { renderFilter } from '@/components/Filter/Filter.render';
 
 export const getTableInfo = async () => {

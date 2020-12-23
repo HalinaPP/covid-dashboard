@@ -1,10 +1,9 @@
-import { loadMap } from '../Map/Map.render';
+import { renderMapContainer } from '../Map/Map.render';
 import { createHtmlElement } from '@/helpers/utils';
 import { renderCountryTable } from '../CountryTable/CountryTable.render';
 import { renderChart } from '../Chart/Chart.render';
 import { renderCountriesList } from '../CountriesList/CountriesList.render';
 import { getCountriesInfo } from '@/services/Countries';
-import { connectedCountryActions, store } from '@/redux/store';
 
 export const renderMainContent = async () => {
     const mainEl = createHtmlElement('main', 'main');
@@ -18,8 +17,10 @@ export const renderMainContent = async () => {
 
     renderCountriesList(leftCol);
     renderCountryTable(leftCol);
+
     renderChart(rightCol);
     await getCountriesInfo();
-    loadMap(rightCol);
+    renderMapContainer(rightCol);
+
     return mainEl;
 };

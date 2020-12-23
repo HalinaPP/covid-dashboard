@@ -1,6 +1,6 @@
 import { getMapinfo } from '@/services/Countries';
 import { store } from '@/redux/store';
-import { CASES, DEATHS, RECOVERY } from '@/constants/map';
+import { CASES, DEATHS, RECOVERY } from '@/constants/constants';
 
 export const getTableInfo = async () => {
     const state = store.getState();
@@ -10,7 +10,7 @@ export const getTableInfo = async () => {
     return info;
 };
 
-async function setTableInfo() {
+const setTableInfo = async () => {
     const wrapper = document.body.querySelector('.country-data-table');
     const info = await getTableInfo();
     const { countryName, casesValueAmount } = info;
@@ -25,7 +25,7 @@ async function setTableInfo() {
                             <div>${casesValueAmount[DEATHS]}</div>
                             <div>${casesValueAmount[RECOVERY]}</div>
                         </div>`;
-}
+};
 
 store.subscribe(async () => {
     await setTableInfo();

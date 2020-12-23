@@ -11,20 +11,13 @@ const getMapOptions = () => {
     return MAP_OPTIONS;
 };
 
-export const renderMapContainer = (mainEl) => {
-    const mapEl = createHtmlElement('div');
-    mapEl.setAttribute('id', MAP_DIV_ID);
-    mainEl.insertAdjacentElement('afterbegin', mapEl);
-    return mapEl;
-};
-
 const renderWorldMap = (mapEl) => {
     return new L.Map(mapEl, getMapOptions()).setView([40, 0], 2);
 };
 
 const renderCountriesPoligonLayer = () => {
     return new L.GeoJSON(data, {
-        onEachFeature,
+        onEachFeature
     });
 };
 
@@ -36,49 +29,50 @@ const renderWorldMapLayer = () => {
     return L.tileLayer(WORLD_MAP_URL, MAP_LAYER_OPTIONS);
 };
 
-export const renderLegendToMap = () => {
-    const innerText = `<div class="legend">
-                            ${LEGEND_TITLE}
-                            <div class="legend-info">${getLegendText()}</div>
-                        </div>`;
+const getLegendPrefix = () => {
+    return `<div class="legend">
+                ${LEGEND_TITLE}
+                <div class="legend-info">${getLegendText()}</div>
+            </div>`;
+};
 
+export const renderLegendToMap = () => {
     const attrOptions = {
-        prefix: innerText,
-        position: 'bottomleft',
+        prefix: getLegendPrefix(),
+        position: 'bottomleft'
     };
 
     return L.control.attribution(attrOptions);
 };
 
-const changeLegendText = () => {
-    const legend = document.querySelector('.legend-info');
-    legend.innerHTML = getLegendText();
-};
+let map;
+let legend;
+let countriesLayer;
 
 const renderMapElement = async (mapEl) => {
-    const map = renderWorldMap(mapEl);
-
+    map = renderWorldMap(mapEl);
     map.addLayer(renderWorldMapLayer());
-
-    renderCountriesPoligonLayer().addTo(map);
     renderScaleControl().addTo(map);
-    renderLegendToMap().addTo(map);
+    legend = renderLegendToMap().addTo(map);
+};
+
+export const renderMapContainer = (mainEl) => {
+    const mapEl = createHtmlElement('div');
+    mapEl.setAttribute('id', MAP_DIV_ID);
+    mainEl.insertAdjacentElement('afterbegin', mapEl);
 
     mapEl.appendChild(renderFilter());
+    renderMapElement(mapEl);
+    return mapEl;
 };
-
-export const loadMap = async (mainEl) => {
-    const mapEl = renderMapContainer(mainEl);
-    await renderMapElement(mapEl);
-};
-
-const changeCountriesPoligonLayer = () => {
-    const oldMap = document.querySelector(`#${MAP_DIV_ID}`);
-    oldMap.remove();
-    loadMap(document.querySelector('.right-col'));
+export const loadMap = async () => {
+    if (countriesLayer) {
+        countriesLayer.remove();
+    }
+    countriesLayer = renderCountriesPoligonLayer().addTo(map);
+    legend.setPrefix(getLegendPrefix());
 };
 
 store.subscribe(() => {
-    changeLegendText();
-    changeCountriesPoligonLayer();
+    loadMap();
 });

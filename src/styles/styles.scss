@@ -33,16 +33,16 @@
     padding: 0;
 }
 
-
-body, html {
-  background-color: $primary-color;
-  font-size: 1.4rem;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  padding: 0;
-  margin: 0;
-  font-family: 'Roboto', sans-serif;
+body,
+html {
+    background-color: $primary-color;
+    font-size: 1.4rem;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
 }
 
 html {
@@ -67,85 +67,82 @@ main {
     flex: 1 0 auto;
     column-gap: 0.5rem;
 }
-a{
-  text-decoration: none;
+a {
+    text-decoration: none;
 }
 
 ::-webkit-scrollbar {
-  width: 5px;
-  background-color: $primary-color;
+    width: 5px;
+    background-color: $primary-color;
 }
 ::-webkit-scrollbar-thumb {
-  background-color: $second-color;
+    background-color: $second-color;
 }
 
-
-.left-col{
-  height: 100%;
-  flex-shrink:0;
-  flex-basis: 40%;
+.left-col {
+    height: 100%;
+    flex-shrink: 0;
+    flex-basis: 40%;
 }
 .right-col {
-  height: 100%;
-  flex-grow: 1;
+    height: 100%;
+    flex-grow: 1;
 }
 aside {
     @include flex(column, space-between, stretch);
 }
 
 footer {
-  flex: 0 0 auto;
-  padding: 1.5rem;
-  @include border;
-  @include shadow;
-  @include flex(row, space-between);
-  column-gap: 5rem;
+    flex: 0 0 auto;
+    padding: 1.5rem;
+    @include border;
+    @include shadow;
+    @include flex(row, space-between);
+    column-gap: 5rem;
 
-  a {
-    color: $second-color;
-    font-weight: bold;
-  }
+    a {
+        color: $second-color;
+        font-weight: bold;
+    }
 
-  .developers {
+    .developers {
+    }
 
-  }
+    span {
+        font-weight: bold;
+    }
 
-  span {
-    font-weight: bold;
-  }
+    img {
+        width: 7rem;
+    }
 
-  img {
-    width: 7rem;
-  }
-
-  .school {
-    @include flex();
-    column-gap: 2rem;
-  }
+    .school {
+        @include flex();
+        column-gap: 2rem;
+    }
 }
 
 @media screen and (max-width: 768px) {
-  main{
-    flex-wrap: wrap;
-  }
-  .right-col{
-    height: auto;
-    flex-basis: 100%;
-    flex-direction: column;
-  }
-  .left-col{
-    height: auto;
-    flex-basis: 100%;
-    flex-direction: column;
-  }
-  #map{
-    height: 300px;
-  }
+    main {
+        flex-wrap: wrap;
+    }
+    .right-col {
+        height: auto;
+        flex-basis: 100%;
+        flex-direction: column;
+    }
+    .left-col {
+        height: auto;
+        flex-basis: 100%;
+        flex-direction: column;
+    }
+    #map {
+        height: 300px;
+    }
 }
 
-
-@import "chart";
 @import 'chart';
-@import './map.scss';
+@import 'map';
 @import 'table';
 @import 'list';
+@import 'filter';

@@ -1,4 +1,4 @@
-import { TITLE } from '@/constants/constants.js';
+import { TITLE } from '@/constants/constants';
 import { createHtmlElement } from '@/helpers/utils';
 
 export const renderHeader = () => {

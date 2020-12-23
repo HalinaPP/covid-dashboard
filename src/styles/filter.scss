@@ -1,0 +1,20 @@
+.filter{
+    position:absolute;
+    right:1rem;
+    top:1rem;
+    z-index: 1000;
+    @include flex();
+    column-gap: 1rem;
+    font-size: 1.6rem;
+
+    select{
+        border: 1px solid #ccc;
+        background-color:#fff;
+        border-top-left-radius: 2px;
+        border-top-right-radius: 2px;
+        z-index: 3000;
+        cursor:pointer;
+
+
+    }
+}

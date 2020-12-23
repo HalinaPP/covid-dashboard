@@ -1,4 +1,5 @@
 .chart-wrapper{
+  position:relative;
   background: $primary-color-light;
   flex: 0 0 auto;
   margin: 1rem;
@@ -16,6 +17,11 @@
   display: block;
   height: 30px;
   width: 100%;
+
+  &-country{
+    padding:1rem;
+    font-weight:bold;
+  }
 }
 
 .zc-ref {

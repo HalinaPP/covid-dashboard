@@ -24,3 +24,12 @@ export const changeToCamelCaseString = (str) => {
         return prev + curr;
     }, '');
 };
+
+export const replaceStringFormat = (str) => {
+    const arr = str
+        .toLowerCase()
+        .split('_')
+        .map((item) => item.toLowerCase())
+        .join(' ');
+    return arr;
+};

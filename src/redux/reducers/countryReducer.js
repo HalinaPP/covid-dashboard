@@ -1,12 +1,12 @@
 import { CHANGE_COUNTRY, CHANGE_PERIOD, CHANGE_VALUE_TYPE, CHANGE_CASES_TYPE } from '../types';
 import { ABSOLUTE, ALL_PERIOD } from '@/services/filterTypes';
-import { CASES, DEATHS, RECOVERY } from '@/constants/map';
+import { CASES } from '@/constants/constants';
 
 const initialState = {
     activeCountry: 'BLR',
     period: ALL_PERIOD,
     valueType: ABSOLUTE,
-    casesType: RECOVERY,
+    casesType: CASES,
 };
 
 export function countryReducer(state = initialState, action) {

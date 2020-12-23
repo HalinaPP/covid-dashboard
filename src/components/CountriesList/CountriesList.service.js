@@ -1,7 +1,7 @@
 import { connectedCountryActions, store } from '@/redux/store';
 import { getCountriesInfo, getMapinfo } from '@/services/Countries';
 import { ALL_PERIOD, LAST_DAY } from '@/services/filterTypes';
-import { CASES, DEATHS, RECOVERY } from '@/constants/map';
+import { CASES, DEATHS, RECOVERY } from '@/constants/constants';
 import { createHtmlElement } from '@/helpers/utils';
 import { WORLD_IMG_URL } from '@/components/Chart/constants';
 

@@ -1,26 +1,14 @@
-import {
-    MAP_OPTIONS,
-    MAP_LAYER_OPTIONS,
-    WORLD_MAP_URL,
-    MAP_DIV_ID,
-    LEGEND_TITLE,
-} from '@/constants/map';
+import { MAP_OPTIONS, MAP_LAYER_OPTIONS, WORLD_MAP_URL, MAP_DIV_ID, LEGEND_TITLE } from './map';
 import { createHtmlElement } from '@/helpers/utils';
 import { onEachFeature, getLegendText } from './Map.service';
 import { store } from '@/redux/store';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import data from '@/data/countries.geo.json';
+import { renderFilter } from '../Filter/Filter.render';
 
 const getMapOptions = () => {
     return MAP_OPTIONS;
-};
-
-export const renderMapContainer = (mainEl) => {
-    const mapEl = createHtmlElement('div');
-    mapEl.setAttribute('id', MAP_DIV_ID);
-    mainEl.prepend(mapEl);
-    return mapEl;
 };
 
 const renderWorldMap = (mapEl) => {
@@ -29,7 +17,7 @@ const renderWorldMap = (mapEl) => {
 
 const renderCountriesPoligonLayer = () => {
     return new L.GeoJSON(data, {
-        onEachFeature,
+        onEachFeature
     });
 };
 
@@ -41,36 +29,50 @@ const renderWorldMapLayer = () => {
     return L.tileLayer(WORLD_MAP_URL, MAP_LAYER_OPTIONS);
 };
 
-export const renderLegendToMap = () => {
-    const innerText = `<div class="legend">
-                            ${LEGEND_TITLE}
-                            <div class="legend-info">${getLegendText()}</div>
-                        </div>`;
+const getLegendPrefix = () => {
+    return `<div class="legend">
+                ${LEGEND_TITLE}
+                <div class="legend-info">${getLegendText()}</div>
+            </div>`;
+};
 
+export const renderLegendToMap = () => {
     const attrOptions = {
-        prefix: innerText,
-        position: 'bottomleft',
+        prefix: getLegendPrefix(),
+        position: 'bottomleft'
     };
 
     return L.control.attribution(attrOptions);
 };
 
-const changeLegendText = () => {
-    const legend = document.querySelector('.legend-info');
-    legend.innerHTML = getLegendText();
+let map;
+let legend;
+let countriesLayer;
+
+const renderMapElement = async (mapEl) => {
+    map = renderWorldMap(mapEl);
+    map.addLayer(renderWorldMapLayer());
+    renderScaleControl().addTo(map);
+    legend = renderLegendToMap().addTo(map);
 };
 
-export const loadMap = async (mainEl) => {
-    const mapEl = renderMapContainer(mainEl);
+export const renderMapContainer = (mainEl) => {
+    const mapEl = createHtmlElement('div');
+    mapEl.setAttribute('id', MAP_DIV_ID);
+    mainEl.insertAdjacentElement('afterbegin', mapEl);
 
-    const map = renderWorldMap(mapEl);
-    map.addLayer(renderWorldMapLayer());
-    renderCountriesPoligonLayer().addTo(map);
-
-    renderScaleControl().addTo(map);
-    renderLegendToMap().addTo(map);
+    mapEl.appendChild(renderFilter());
+    renderMapElement(mapEl);
+    return mapEl;
+};
+export const loadMap = async () => {
+    if (countriesLayer) {
+        countriesLayer.remove();
+    }
+    countriesLayer = renderCountriesPoligonLayer().addTo(map);
+    legend.setPrefix(getLegendPrefix());
 };
 
 store.subscribe(() => {
-    changeLegendText();
+    loadMap();
 });

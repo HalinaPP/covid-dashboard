@@ -1,5 +1,6 @@
 import { createHtmlElement } from '@/helpers/utils';
 import { doSearch, setCountries } from '@/components/CountriesList/CountriesList.service';
+import { renderFilter } from '../Filter/Filter.render';
 
 const renderInfoContainer = (listEl) => {
     const filterBlock = createHtmlElement('div', 'list--search-wrapper');
@@ -36,6 +37,7 @@ const renderTableWrapperContainer = (mainEl) => {
 
 export const renderCountriesList = (mainEl) => {
     const wrapper = renderTableWrapperContainer(mainEl);
+    wrapper.appendChild(renderFilter());
     renderInfoContainer(wrapper);
     renderTableContainer(wrapper);
 };

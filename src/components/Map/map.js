@@ -34,9 +34,7 @@ const MAP_CENTER = [17.385044, 78.486671];
 
 const MAP_LAYER_OPTIONS = {
     attribution: '',
-    maxZoom: 16,
-    continuousWorld: false,
-    noWrap: true
+    maxZoom: 16
 };
 
 const MAP_OPTIONS = {
@@ -49,21 +47,17 @@ const MAP_OPTIONS = {
     minZoom: 0
 };
 
-const DEATHS = 'deaths';
-const RECOVERY = 'recovered';
-const CASES = 'cases';
 const DEATHS_COLOR = 'black';
 const RECOVERY_COLOR = 'green';
 const CASES_COLOR = 'red';
 const LEGEND_TITLE = '<h3>Color range of cases:</h3>';
-
+const RELATIVE_DIVIDER = 100000;
+const RELATIVE_DIVIDER_LEGEND = 500;
+const RELATIVE_DIVIDER_DEATH_LEGEND = 100;
 export {
     MAP_CENTER,
     MAP_LAYER_OPTIONS,
     MAP_OPTIONS,
-    DEATHS,
-    RECOVERY,
-    CASES,
     DEATHS_COLOR,
     RECOVERY_COLOR,
     CASES_COLOR,
@@ -74,5 +68,8 @@ export {
     LEGEND_TITLE,
     COLORS_MAP,
     COLORS_MAP_BORDER,
-    COUNTRY_HOVER_STYLE
+    COUNTRY_HOVER_STYLE,
+    RELATIVE_DIVIDER,
+    RELATIVE_DIVIDER_LEGEND,
+    RELATIVE_DIVIDER_DEATH_LEGEND
 };

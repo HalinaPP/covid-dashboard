@@ -3,17 +3,11 @@ import {
     CHART_DIV_ID,
     GET_COUNTRY_HISTORY_URL_BY_NAME,
     GRAPHIC_COLOR,
-    secondColor,
+    secondColor
 } from '@/components/Chart/constants';
 import { store } from '@/redux/store';
-import {
-    CASES,
-    CASES_COLOR,
-    DEATHS,
-    DEATHS_COLOR,
-    RECOVERY,
-    RECOVERY_COLOR,
-} from '@/constants/map';
+import { CASES, DEATHS, RECOVERY } from '@/constants/constants';
+import { CASES_COLOR, DEATHS_COLOR, RECOVERY_COLOR } from '@/components/Map/map';
 import { ABSOLUTE, ALL_PERIOD, LAST_DAY, RELATIVE } from '@/services/filterTypes';
 import { getCountriesInfo } from '@/services/Countries';
 import { createHtmlElement } from '@/helpers/utils';
@@ -29,7 +23,7 @@ export async function getChartInfo() {
     const result = {
         casesType: null,
         casesCount: 0,
-        timeLine: 0,
+        timeLine: 0
     };
     const countries = await getCountriesInfo();
     const countryName = state.country.activeCountry;
@@ -59,7 +53,7 @@ export async function getChartInfo() {
 
     const periodArray = {
         timeLine: null,
-        casesCount: null,
+        casesCount: null
     };
 
     if (state.country.period === ALL_PERIOD) {
@@ -116,17 +110,17 @@ export const setChartData = async () => {
                     text: jsonData.casesType,
                     values: jsonData.casesCount,
                     backgroundColor: getGraphicColor(),
-                    scales: 'scale-x,scale-y',
-                },
+                    scales: 'scale-x,scale-y'
+                }
             ],
             scaleY: {
                 items: jsonData.casesCount,
-                'min-value': 0,
+                'min-value': 0
             },
             scaleX: {
-                labels: jsonData.timeLine,
-            },
-        },
+                labels: jsonData.timeLine
+            }
+        }
     });
 };
 

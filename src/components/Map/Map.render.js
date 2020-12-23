@@ -60,9 +60,7 @@ const renderMapElement = async (mapEl) => {
 export const renderMapContainer = (mainEl) => {
     const mapEl = createHtmlElement('div');
     mapEl.setAttribute('id', MAP_DIV_ID);
-    const fullscreenBtn = createHtmlElement('div', 'full-screen');
-    fullscreenBtn.innerHTML = `<img width="15" height="15" src=${FULL_SCREEN} alt="fullscreen"/>`;
-    mapEl.appendChild(fullscreenBtn);
+
     mainEl.insertAdjacentElement('afterbegin', mapEl);
 
     renderMapElement(mapEl);
@@ -73,11 +71,30 @@ export const loadMap = async () => {
         countriesLayer.remove();
     }
     countriesLayer = renderCountriesPoligonLayer().addTo(map);
+
     legend.setPrefix(getLegendPrefix());
 };
 
 store.subscribe(() => {
     const mapEl = document.body.querySelector(`#${MAP_DIV_ID}`);
     mapEl.appendChild(renderFilter());
+
+    const fullscreenBtn = createHtmlElement('div', 'full-screen');
+    fullscreenBtn.innerHTML = `<img width="15" height="15" src=${FULL_SCREEN} alt="fullscreen"/>`;
+    fullscreenBtn.addEventListener('click', (e) => {
+        const selector = e.target.closest('div').id;
+        const fullscreens = document.body.querySelectorAll('.full-screen');
+        fullscreens.forEach((item) => {
+            if (item.id !== selector) item.classList.toggle('hidden');
+        });
+        const section = document.querySelector('#map');
+
+        section.style.position = section.style.position === 'absolute' ? 'relative' : 'absolute';
+        section.classList.toggle('fullscreen');
+        map.invalidateSize(true);
+    });
+
+    mapEl.appendChild(fullscreenBtn);
+
     loadMap();
 });

@@ -25,7 +25,7 @@
     box-shadow: 0 0 5rem rgba(0, 0, 0, 0.5);
     user-select: none;
     transition: bottom 0.4s;
-    z-index:2000;
+    z-index:200000;
 }
 
 .keyboard--hidden {
@@ -37,7 +37,7 @@
 }
 
 .keyboard__key {
-    height: 4.5rem;
+    height: 3rem;
     width: 6%;
     max-width: 9rem;
     margin: 0.3rem;

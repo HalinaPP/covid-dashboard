@@ -1,8 +1,6 @@
 import { createHtmlElement, createIconHTML } from '@/helpers/utils';
-import { doSearch, setCountries } from '@/components/CountriesList/CountriesList.service';
-import { renderFilter } from '../Filter/Filter.render';
+import { doSearch } from '@/components/CountriesList/CountriesList.service';
 import { FULL_SCREEN } from '@/constants/constants';
-
 import { openKeyboard } from '@/components/Keyboard/Keyboard.service';
 
 const renderInfoContainer = (listEl) => {

@@ -33,3 +33,7 @@ export const replaceStringFormat = (str) => {
         .join(' ');
     return arr;
 };
+
+export const createIconHTML = (iconName) => {
+    return `<i class="material-icons">${iconName}</i>`;
+};

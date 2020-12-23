@@ -1,21 +1,27 @@
-import { createHtmlElement } from '@/helpers/utils';
+import { createHtmlElement, createIconHTML } from '@/helpers/utils';
 import { doSearch, setCountries } from '@/components/CountriesList/CountriesList.service';
 import { renderFilter } from '../Filter/Filter.render';
+import { openKeyboard } from '@/components/Keyboard/Keyboard.service';
 
 const renderInfoContainer = (listEl) => {
     const filterBlock = createHtmlElement('div', 'list--search-wrapper');
-    const search = createHtmlElement('input', 'list--search-search');
     const filter = createHtmlElement('div', 'list--search-filter');
-
-    search.placeholder = 'Search';
     filter.innerHTML = 'filter';
 
+    const search = createHtmlElement('input', 'list--search-search');
+
+    const keyboardIcon = createHtmlElement('div', 'keyboardIcon');
+    keyboardIcon.innerHTML = createIconHTML('keyboard');
+    keyboardIcon.addEventListener('click', () => openKeyboard());
+
+    search.placeholder = 'Search';
+    search.setAttribute('id', 'inputText');
+    search.addEventListener('click', () => openKeyboard());
     search.addEventListener('keyup', () => {
         doSearch();
     });
 
-    filterBlock.appendChild(search);
-    filterBlock.appendChild(filter);
+    filterBlock.append(search, keyboardIcon, filter);
 
     listEl.appendChild(filterBlock);
     return filterBlock;

@@ -1,9 +1,20 @@
 .full-screen{
-  position: absolute;
+  position: absolute!important;
   top: -0.8rem;
   right: -0.8rem;
   z-index: 100000 !important;
   &:hover{
     cursor: pointer;
+  }
+}
+
+#map {
+  .full-screen{
+  position: absolute!important;
+  top: 0;
+  right: 0.5rem;
+}
+  .filter{
+    top:2rem
   }
 }

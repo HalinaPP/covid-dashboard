@@ -1,0 +1,121 @@
+.keyboardIcon {
+  width: 2rem;
+  height: 2rem;
+  position: absolute;
+  left: 2.5rem;
+  cursor: pointer;
+}
+
+.use-keyboard-input {
+  display: block;
+  width: 90%;
+  margin: 3rem auto;
+  padding: 1rem;
+  font-size: 2rem;
+  height: calc(100vh - 38rem);
+  min-height: 30rem;
+}
+
+.keyboard {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding: 0.5rem 0;
+  background: #09294e;
+  -webkit-box-shadow: 0 0 5rem rgba(0, 0, 0, 0.5);
+          box-shadow: 0 0 5rem rgba(0, 0, 0, 0.5);
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  -webkit-transition: bottom 0.4s;
+  transition: bottom 0.4s;
+  z-index: 200000;
+}
+
+.keyboard--hidden {
+  bottom: -100%;
+}
+
+.keyboard__keys {
+  text-align: center;
+}
+
+.keyboard__key {
+  height: 3rem;
+  width: 6%;
+  max-width: 9rem;
+  margin: 0.3rem;
+  border-radius: 0.4rem;
+  border: none;
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  font-size: 2rem;
+  outline: none;
+  cursor: pointer;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  vertical-align: top;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+  position: relative;
+  -webkit-transition: background-color 0.2s ease-in-out;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.keyboard__key:active {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.keyboard__key--wide {
+  width: 12%;
+}
+
+.keyboard__key--extra-wide {
+  width: 36%;
+  max-width: 50rem;
+}
+
+.keyboard__key--activatable::after {
+  content: '';
+  top: 1rem;
+  right: 1rem;
+  position: absolute;
+  width: 0.8rem;
+  height: 0.8rem;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 50%;
+}
+
+.keyboard__key--active::after {
+  background: #40f167;
+}
+
+.keyboard__key--dark {
+  background: rgba(0, 0, 0, 0.25);
+}
+
+.push {
+  background-color: red;
+  -webkit-transition: background-color 1s ease-in-out;
+  transition: background-color 1s ease-in-out;
+}
+
+@media (max-width: 768px) {
+  .keyboard__key--wide {
+    width: 8%;
+  }
+  .keyboard__key--activatable::after {
+    top: 0.3rem;
+    right: 0.3rem;
+  }
+}
+/*# sourceMappingURL=virtualKeyboard.css.map */

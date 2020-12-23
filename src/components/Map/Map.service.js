@@ -189,7 +189,7 @@ export const onEachFeature = async (feature, layer) => {
     layer.setStyle(styleF);
     layer.on({
         mouseover: mouseOverFeature,
-        mouseleave: mouseOutFeature,
+        mouseout: mouseOutFeature,
         click: handleClick
     });
 };

@@ -10,6 +10,8 @@ export const renderCountryTable = (mainEl) => {
     fullscreenBtn.id = '.country-data-table';
     fullscreenBtn.innerHTML = `<img width="15" height="15" src=${FULL_SCREEN} alt="fullscreen"/>`;
     fullscreenBtn.addEventListener('click', (e) => {
+        // eslint-disable-next-line no-restricted-globals
+        window.scrollTo(pageXOffset, 0);
         const selector = e.target.closest('div').id;
         const fullscreens = document.body.querySelectorAll('.full-screen');
         fullscreens.forEach((item) => {
@@ -17,6 +19,7 @@ export const renderCountryTable = (mainEl) => {
         });
         const section = document.body.querySelector(selector);
         section.classList.toggle('fullscreen');
+        document.body.classList.toggle('no-scroll');
     });
     table.appendChild(fullscreenBtn);
     mainEl.appendChild(table);

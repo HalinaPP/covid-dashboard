@@ -82,6 +82,8 @@ store.subscribe(() => {
     const fullscreenBtn = createHtmlElement('div', 'full-screen');
     fullscreenBtn.innerHTML = `<img width="15" height="15" src=${FULL_SCREEN} alt="fullscreen"/>`;
     fullscreenBtn.addEventListener('click', (e) => {
+        // eslint-disable-next-line no-restricted-globals
+        window.scrollTo(pageXOffset, 0);
         const selector = e.target.closest('div').id;
         const fullscreens = document.body.querySelectorAll('.full-screen');
         fullscreens.forEach((item) => {
@@ -91,6 +93,7 @@ store.subscribe(() => {
 
         section.style.position = section.style.position === 'absolute' ? 'relative' : 'absolute';
         section.classList.toggle('fullscreen');
+        document.body.classList.toggle('no-scroll');
         map.invalidateSize(true);
     });
 

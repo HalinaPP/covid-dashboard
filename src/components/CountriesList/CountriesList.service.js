@@ -93,7 +93,7 @@ export const doSearch = () => {
     }
 };
 
-store.subscribe(async () => {
-    await setCountries();
+store.subscribe(() => {
+    setCountries();
     doSearch();
 });

@@ -17,7 +17,7 @@ const renderWorldMap = (mapEl) => {
 
 const renderCountriesPoligonLayer = () => {
     return new L.GeoJSON(data, {
-        onEachFeature
+        onEachFeature,
     });
 };
 
@@ -39,7 +39,7 @@ const getLegendPrefix = () => {
 export const renderLegendToMap = () => {
     const attrOptions = {
         prefix: getLegendPrefix(),
-        position: 'bottomleft'
+        position: 'bottomleft',
     };
 
     return L.control.attribution(attrOptions);

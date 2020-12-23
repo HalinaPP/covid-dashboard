@@ -89,9 +89,9 @@ store.subscribe(() => {
         });
         const section = document.querySelector('#map');
 
-        //  const section = document.body.querySelector(selector);
-        section.style.position = 'absolute';
+        section.style.position = section.style.position === 'absolute' ? 'relative' : 'absolute';
         section.classList.toggle('fullscreen');
+        map.invalidateSize(true);
     });
 
     mapEl.appendChild(fullscreenBtn);

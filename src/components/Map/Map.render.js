@@ -6,6 +6,7 @@ import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import data from '@/data/countries.geo.json';
 import { renderFilter } from '../Filter/Filter.render';
+import { FULL_SCREEN } from '@/constants/constants';
 
 const getMapOptions = () => {
     return MAP_OPTIONS;
@@ -59,6 +60,9 @@ const renderMapElement = async (mapEl) => {
 export const renderMapContainer = (mainEl) => {
     const mapEl = createHtmlElement('div');
     mapEl.setAttribute('id', MAP_DIV_ID);
+    const fullscreenBtn = createHtmlElement('div', 'full-screen');
+    fullscreenBtn.innerHTML = `<img width="15" height="15" src=${FULL_SCREEN} alt="fullscreen"/>`;
+    mapEl.appendChild(fullscreenBtn);
     mainEl.insertAdjacentElement('afterbegin', mapEl);
 
     renderMapElement(mapEl);

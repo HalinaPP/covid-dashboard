@@ -75,10 +75,16 @@ export const loadMap = async () => {
     legend.setPrefix(getLegendPrefix());
 };
 
-store.subscribe(() => {
+store.subscribe(async () => {
     const mapEl = document.body.querySelector(`#${MAP_DIV_ID}`);
-    mapEl.appendChild(renderFilter());
-
+    const fullscreen = mapEl.querySelector('.full-screen');
+    const filter = mapEl.querySelector('.filter');
+    if(fullscreen){
+      fullscreen.remove();
+    }
+    if(filter){
+        filter.remove();
+    }
     const fullscreenBtn = createHtmlElement('div', 'full-screen');
     fullscreenBtn.innerHTML = `<img width="15" height="15" src=${FULL_SCREEN} alt="fullscreen"/>`;
     fullscreenBtn.addEventListener('click', (e) => {
@@ -96,8 +102,7 @@ store.subscribe(() => {
         document.body.classList.toggle('no-scroll');
         map.invalidateSize(true);
     });
-
     mapEl.appendChild(fullscreenBtn);
-
-    loadMap();
+    await loadMap();
+    mapEl.appendChild(renderFilter());
 });

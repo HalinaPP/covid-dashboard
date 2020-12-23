@@ -8,8 +8,7 @@ import { openKeyboard } from '@/components/Keyboard/Keyboard.service';
 const renderInfoContainer = (listEl) => {
     const filterBlock = createHtmlElement('div', 'list--search-wrapper');
 
-    const filter = createHtmlElement('div', 'list--search-filter filter');
-    filter.innerHTML = 'filter';
+    const filter = createHtmlElement('div', 'list--search-filter filter-wrapper');
 
     const search = createHtmlElement('input', 'list--search-search');
 

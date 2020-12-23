@@ -29,20 +29,22 @@ export const setTableInfo = async () => {
                         <div class="country-data-table-header">
                             <div>
                                 ${CASES}:
-                                <span style="color:${CASES_COLOR}">${casesValueAmount[CASES]}</span>
+                                <span style="color:${CASES_COLOR}">
+                                    ${casesValueAmount[CASES]}
+                                </span>
                             </div>
-                            <div>${DEATHS}: <span style="color:${DEATHS_COLOR}">${
-        casesValueAmount[DEATHS]
-    }</span></div>
-                            <div>${RECOVERY}: <span style="color:${RECOVERY_COLOR}">${
-        casesValueAmount[RECOVERY]
-    }</span></div>
+                            <div>${DEATHS}:
+                                <span style="color:${DEATHS_COLOR}">
+                                    ${casesValueAmount[DEATHS]}
+                                </span>
+                            </div>
+                            <div>${RECOVERY}:
+                                <span style="color:${RECOVERY_COLOR}">
+                                    ${casesValueAmount[RECOVERY]}
+                                </span>
+                            </div>
                         </div>`;
-    /* <div class="country-data-table-data">
-                            <div>${casesValueAmount[CASES]}</div>
-                            <div></div>
-                            <div></div>
-                        </div>`; */
+
     table.appendChild(wrapper);
     table.prepend(renderFilter());
 };

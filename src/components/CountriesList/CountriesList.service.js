@@ -3,9 +3,8 @@ import { getCountriesInfo } from '@/services/Countries';
 import { CASES, DEATHS, RECOVERY, WORLD_ID, WORLD_NAME } from '@/constants/constants';
 import {countCountryRelativeOneHundred, createHtmlElement, getCasesColor} from '@/helpers/utils';
 import { WORLD_IMG_URL } from '@/components/Chart/constants';
-import {renderFilter, renderOnefilterElement} from '@/components/Filter/Filter.render';
-import { FILTERS } from '@/components/Filter/filter';
 import {ABSOLUTE, ALL_PERIOD, LAST_DAY, RELATIVE} from '@/services/filterTypes';
+import {renderFilter} from '@/components/Filter/Filter.render';
 
 async function getCountries() {
     const state = store.getState();
@@ -85,7 +84,7 @@ function renderCountryItem(country) {
 const setFilter = () => {
     const filterWrap = document.querySelector('.list--search-filter');
     filterWrap.innerHTML = '';
-    filterWrap.appendChild(renderFilter());
+    filterWrap.prepend(renderFilter());
 };
 
 export const setCountries = async () => {

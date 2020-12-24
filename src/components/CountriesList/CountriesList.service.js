@@ -11,10 +11,9 @@ async function getCountries() {
     const state = store.getState();
 
     const countries = await getCountriesInfo();
-    return countries.map((country) => {
-        if (!country.id) {
-            return null;
-        }
+    const countryResult = [];
+     countries.forEach((country) => {
+        if (country.id) {
         const casesObj = country.allPeriod;
         let cases;
         switch (state.country.casesType) {
@@ -30,13 +29,15 @@ async function getCountries() {
             default:
                 break;
         }
-        return {
+         countryResult.push({
             name: country.name,
             flag: country.flag,
             cases: cases,
             id: country.id,
-        };
+        });
+        }
     });
+     return countryResult;
 }
 
 function renderCountryItem(country) {
@@ -71,14 +72,12 @@ export const setCountries = async () => {
     const list = document.querySelector('.countries-list');
     const state = store.getState().country;
     let selectedCountry = null;
+    let worldOption = null;
     list.innerHTML = '';
     const countries = await getCountries();
 
     countries.sort((a, b) => {
-        if (a && b) {
             return b.cases - a.cases;
-        }
-        return 0;
     });
 
     countries.forEach((country) => {
@@ -88,11 +87,17 @@ export const setCountries = async () => {
         const countryLi = renderCountryItem(country, state);
         if (state.activeCountry === country.id) {
             selectedCountry = countryLi;
-        } else {
-            list.append(countryLi);
+        } else if(country.id === WORLD_ID){
+            worldOption = countryLi;
+        }
+        else{
+            list.append(countryLi)
         }
     });
     selectedCountry.classList.add('active');
+    if(worldOption){
+        list.prepend(worldOption);
+    }
     list.prepend(selectedCountry);
 };
 

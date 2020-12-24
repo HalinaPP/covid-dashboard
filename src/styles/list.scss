@@ -67,12 +67,14 @@
     }
   }
   .active{
-    background: $primary-color-light;
-    opacity: 0.5;
+    @include shadow();
+    background: $primary-color;
+    font-weight: bold;
+    border: none;
     div{
       &:hover{
         cursor: default;
-        background: $primary-color-light;
+        background: $primary-color;
       }
     }
   }

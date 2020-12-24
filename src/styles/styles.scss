@@ -73,7 +73,7 @@ a {
 }
 
 ::-webkit-scrollbar {
-    width: 5px;
+    width: 0.5rem;
     background-color: $primary-color;
 }
 ::-webkit-scrollbar-thumb {
@@ -106,9 +106,6 @@ footer {
         font-weight: bold;
     }
 
-    .developers {
-    }
-
     span {
         font-weight: bold;
     }
@@ -122,11 +119,12 @@ footer {
         column-gap: 2rem;
     }
 }
+
 .update{
     position: absolute;
     display: flex;
-    right:5px;
-    top:60px;
+    right:0.5rem;
+    top:6rem;
 }
 
 
@@ -144,9 +142,8 @@ footer {
         flex-basis: 100%;
         flex-direction: column;
     }
-    #map {
-        height: 300px;
-    }
+
+
 }
 
 @import 'chart';
@@ -157,8 +154,8 @@ footer {
 @import "fullscreen";
 .fullscreen{
     position: absolute;
-    left: 3px;
-    top: 5px;
+    left: 0.3rem;
+    top: 0.5rem;
     width: 99%;
     height: 99%;
     z-index: 2000;

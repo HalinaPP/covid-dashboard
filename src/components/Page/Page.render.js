@@ -3,7 +3,6 @@ import { renderFavicon } from '@/helpers/utils';
 import { renderHeader } from '../Header/Header.render';
 import { renderFooter } from '../Footer/Footer.render';
 import { renderMainContent } from '../Main/Main.render';
-import { getCountriesInfo } from '@/services/Countries';
 import { store } from '@/redux/store';
 import { renderKeyboard } from '@/components/Keyboard/Keyboard.render';
 

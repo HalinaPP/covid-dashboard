@@ -137,7 +137,7 @@ const mouseOutFeature = (event) => {
         fillOpacity: 1
     });
 
-    // feature.closePopup();
+    feature.closePopup();
 };
 
 const handleClick = (event) => {

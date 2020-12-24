@@ -1,12 +1,13 @@
 import { createHtmlElement } from '@/helpers/utils';
 import { CHART_DIV_ID } from './constants';
 import zingchart from 'zingchart';
-import { setChartData } from './Chart.service';
 import { myConfig, ONE_HUNDRED, ONE_MILLION } from '@/components/Chart/constants';
 import { setInfoContainer } from '@/components/Chart/Chart.service';
 zingchart.ASYNC = true;
-import { renderFilter } from '../Filter/Filter.render';
-import { FULL_SCREEN } from '@/constants/constants';
+import {
+    renderFullScreenButton,
+    handleFullScreenButton
+} from '@/components/FullScreenButton/FullScreenButton.render';
 
 window.formatChartAxis = (v) => {
     let formattingLabel = v;
@@ -31,21 +32,10 @@ const renderInfoContainer = (mainEl) => {
 
 const renderChartContainer = (mainEl) => {
     const chartEl = createHtmlElement('div', 'chart--container');
-    const fullscreenBtn = createHtmlElement('div', 'full-screen');
+
+    const fullscreenBtn = renderFullScreenButton(mainEl);
     fullscreenBtn.id = '.chart-wrapper';
-    fullscreenBtn.innerHTML = `<img width="15" height="15" src=${FULL_SCREEN} alt="fullscreen"/>`;
-    fullscreenBtn.addEventListener('click', (e) => {
-        // eslint-disable-next-line no-restricted-globals
-        window.scrollTo(pageXOffset, 0);
-        const selector = e.target.closest('div').id;
-        const fullscreens = document.body.querySelectorAll('.full-screen');
-        fullscreens.forEach((item) => {
-            if (item.id !== selector) item.classList.toggle('hidden');
-        });
-        const section = document.body.querySelector(selector);
-        section.classList.toggle('fullscreen');
-        document.body.classList.toggle('no-scroll');
-    });
+    fullscreenBtn.addEventListener('click', handleFullScreenButton);
 
     chartEl.setAttribute('id', CHART_DIV_ID);
     mainEl.appendChild(chartEl);
@@ -58,14 +48,14 @@ const renderCovidChart = () => {
         id: CHART_DIV_ID,
         data: myConfig,
         width: '100%',
-        height: 150,
+        height: 150
     });
 };
 
 export const renderChart = (mainEl) => {
     const wrapper = renderChartWrapperContainer(mainEl);
 
-    const infoContainer = renderInfoContainer(wrapper);
+    renderInfoContainer(wrapper);
     const chart = renderChartContainer(wrapper);
     renderCovidChart();
     return chart;

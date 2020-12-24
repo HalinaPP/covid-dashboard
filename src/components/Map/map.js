@@ -31,6 +31,7 @@ const MAP_DIV_ID = 'map';
 const WORLD_MAP_URL =
     'https://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}';
 const MAP_CENTER = [50.385044, 30.486671];
+const MAP_ZOOM_FS = 3;
 
 const MAP_LAYER_OPTIONS = {
     attribution: '',
@@ -55,8 +56,11 @@ const RELATIVE_AMOUNT_LEGEND = 'per 100k of population';
 const RELATIVE_DIVIDER = 100000;
 const RELATIVE_DIVIDER_LEGEND = 500;
 const RELATIVE_DIVIDER_DEATH_LEGEND = 100;
+const POSITION = { absolute: 'absolute', relative: 'relative' };
+
 export {
     MAP_CENTER,
+    MAP_ZOOM_FS,
     MAP_LAYER_OPTIONS,
     MAP_OPTIONS,
     DEATHS_COLOR,
@@ -73,5 +77,6 @@ export {
     RELATIVE_DIVIDER,
     RELATIVE_DIVIDER_LEGEND,
     RELATIVE_DIVIDER_DEATH_LEGEND,
-    RELATIVE_AMOUNT_LEGEND
+    RELATIVE_AMOUNT_LEGEND,
+    POSITION
 };

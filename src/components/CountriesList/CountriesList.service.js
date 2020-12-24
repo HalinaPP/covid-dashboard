@@ -1,10 +1,9 @@
 import { connectedCountryActions, store } from '@/redux/store';
-import { getCountriesInfo, getMapinfo } from '@/services/Countries';
-import { ALL_PERIOD, LAST_DAY } from '@/services/filterTypes';
+import { getCountriesInfo } from '@/services/Countries';
 import { CASES, DEATHS, RECOVERY, WORLD_ID, WORLD_NAME } from '@/constants/constants';
 import { createHtmlElement, getCasesColor } from '@/helpers/utils';
 import { WORLD_IMG_URL } from '@/components/Chart/constants';
-import { renderFilter, renderOnefilterElement } from '@/components/Filter/Filter.render';
+import { renderOnefilterElement } from '@/components/Filter/Filter.render';
 import { FILTERS } from '@/components/Filter/filter';
 
 async function getCountries() {
@@ -12,32 +11,32 @@ async function getCountries() {
 
     const countries = await getCountriesInfo();
     const countryResult = [];
-     countries.forEach((country) => {
+    countries.forEach((country) => {
         if (country.id) {
-        const casesObj = country.allPeriod;
-        let cases;
-        switch (state.country.casesType) {
-            case CASES:
-                cases = casesObj.cases;
-                break;
-            case DEATHS:
-                cases = casesObj.deaths;
-                break;
-            case RECOVERY:
-                cases = casesObj.recovered;
-                break;
-            default:
-                break;
-        }
-         countryResult.push({
-            name: country.name,
-            flag: country.flag,
-            cases: cases,
-            id: country.id,
-        });
+            const casesObj = country.allPeriod;
+            let cases;
+            switch (state.country.casesType) {
+                case CASES:
+                    cases = casesObj.cases;
+                    break;
+                case DEATHS:
+                    cases = casesObj.deaths;
+                    break;
+                case RECOVERY:
+                    cases = casesObj.recovered;
+                    break;
+                default:
+                    break;
+            }
+            countryResult.push({
+                name: country.name,
+                flag: country.flag,
+                cases: cases,
+                id: country.id
+            });
         }
     });
-     return countryResult;
+    return countryResult;
 }
 
 function renderCountryItem(country) {
@@ -77,7 +76,7 @@ export const setCountries = async () => {
     const countries = await getCountries();
 
     countries.sort((a, b) => {
-            return b.cases - a.cases;
+        return b.cases - a.cases;
     });
 
     countries.forEach((country) => {
@@ -87,15 +86,14 @@ export const setCountries = async () => {
         const countryLi = renderCountryItem(country, state);
         if (state.activeCountry === country.id) {
             selectedCountry = countryLi;
-        } else if(country.id === WORLD_ID){
+        } else if (country.id === WORLD_ID) {
             worldOption = countryLi;
-        }
-        else{
-            list.append(countryLi)
+        } else {
+            list.append(countryLi);
         }
     });
     selectedCountry.classList.add('active');
-    if(worldOption){
+    if (worldOption) {
         list.prepend(worldOption);
     }
     list.prepend(selectedCountry);

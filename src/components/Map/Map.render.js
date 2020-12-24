@@ -4,17 +4,23 @@ import {
     WORLD_MAP_URL,
     MAP_DIV_ID,
     LEGEND_TITLE,
-    RELATIVE_AMOUNT_LEGEND
+    RELATIVE_AMOUNT_LEGEND,
+    MAP_CENTER,
+    MAP_ZOOM_FS,
+    POSITION
 } from './map';
 import { RELATIVE } from '@/services/filterTypes';
 import { createHtmlElement } from '@/helpers/utils';
+import {
+    renderFullScreenButton,
+    hideOtherFullscreenBtn
+} from '@/components/FullScreenButton/FullScreenButton.render';
 import { onEachFeature, getLegendText } from './Map.service';
 import { store } from '@/redux/store';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import data from '@/data/countries.geo.json';
 import { renderFilter } from '../Filter/Filter.render';
-import { FULL_SCREEN } from '@/constants/constants';
 
 const getMapOptions = () => {
     return MAP_OPTIONS;
@@ -71,14 +77,18 @@ const renderMapElement = async (mapEl) => {
 };
 
 export const renderMapContainer = (mainEl) => {
+    const mapWrapper = createHtmlElement('div', 'map-wrapper');
     const mapEl = createHtmlElement('div');
     mapEl.setAttribute('id', MAP_DIV_ID);
 
-    mainEl.insertAdjacentElement('afterbegin', mapEl);
+    mapWrapper.appendChild(mapEl);
+    mainEl.insertAdjacentElement('afterbegin', mapWrapper);
 
     renderMapElement(mapEl);
-    return mapEl;
+
+    return mapWrapper;
 };
+
 export const loadMap = async () => {
     if (countriesLayer) {
         countriesLayer.remove();
@@ -88,36 +98,53 @@ export const loadMap = async () => {
     legend.setPrefix(getLegendPrefix());
 };
 
+const changeMapElStyle = () => {
+    const mapWrapper = document.querySelector('.map-wrapper');
+    const position = mapWrapper.style.position;
+
+    let mapZoom = MAP_ZOOM_FS;
+    mapWrapper.style.margin = '0';
+    mapWrapper.classList.remove('map-fullscreen');
+
+    if (position === POSITION.absolute) {
+        mapZoom = MAP_OPTIONS.zoom;
+        mapWrapper.style.margin = '1rem';
+        mapWrapper.classList.add('map-fullscreen');
+    }
+
+    map.setView(MAP_CENTER, mapZoom);
+
+    mapWrapper.style.position =
+        position === POSITION.absolute ? POSITION.relative : POSITION.absolute;
+    mapWrapper.classList.toggle('fullscreen');
+};
+
+const handleFullScreen = (event) => {
+    // eslint-disable-next-line no-restricted-globals
+    window.scrollTo(pageXOffset, 0);
+    document.body.classList.toggle('no-scroll');
+
+    const selector = event.target.closest('div').id;
+    hideOtherFullscreenBtn(selector);
+
+    changeMapElStyle();
+
+    map.invalidateSize(true);
+};
+
 store.subscribe(async () => {
     const mapEl = document.body.querySelector(`#${MAP_DIV_ID}`);
-    const fullscreen = mapEl.querySelector('.full-screen');
+
     const filter = mapEl.querySelector('.filter');
-    if (fullscreen) {
-        fullscreen.remove();
-    }
     if (filter) {
         filter.remove();
     }
-    const fullscreenBtn = createHtmlElement('div', 'full-screen');
-    fullscreenBtn.innerHTML = `<img width="15" height="15" src=${FULL_SCREEN} alt="fullscreen"/>`;
-    fullscreenBtn.addEventListener('click', (e) => {
-        // eslint-disable-next-line no-restricted-globals
-        window.scrollTo(pageXOffset, 0);
-        const selector = e.target.closest('div').id;
-        const fullscreens = document.body.querySelectorAll('.full-screen');
-        fullscreens.forEach((item) => {
-            if (item.id !== selector) item.classList.toggle('hidden');
-        });
-        const section = document.querySelector('#map');
-        section.style.margin = section.style.position === 'absolute' ? '1rem' : 0;
-        section.style.position = section.style.position === 'absolute' ? 'relative' : 'absolute';
-        section.style.height = section.style.position === 'absolute' ? '100%' : 'auto';
 
-        section.classList.toggle('fullscreen');
-        document.body.classList.toggle('no-scroll');
-        map.invalidateSize(true);
-    });
-    mapEl.appendChild(fullscreenBtn);
+    const mapWrapper = mapEl.parentElement;
+    const fullscreenBtn = renderFullScreenButton(mapWrapper, handleFullScreen);
+    fullscreenBtn.addEventListener('click', handleFullScreen);
+    mapWrapper.appendChild(fullscreenBtn);
+
     await loadMap();
     mapEl.appendChild(renderFilter());
 });

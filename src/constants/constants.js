@@ -1,11 +1,12 @@
 const ICON_PATH = './assets/icons';
 const FAVICON_URL = `${ICON_PATH}/favicon.ico`;
-const TITLE = 'Covid-19 dashbord';
+const TITLE = 'Covid-19 dashboard';
 export const WORLD_ID = 'all';
 export const FULL_SCREEN = 'https://img.icons8.com/metro/26/000000/fit-to-width.png';
+const FULL_SCREEN_IMG = `<img width="15" height="15" src=${FULL_SCREEN} alt="fullscreen"/>`;
 export const WORLD_NAME = 'World';
 const IMAGES = {
-    rsLogo: `${ICON_PATH}/rs_school_js.svg`,
+    rsLogo: `${ICON_PATH}/rs_school_js.svg`
 };
 const FOOTER_COPYRIGHT_DEVELOPERS = `<span><a href='https://github.com/Arcuman'>@arcuman</a> & <a href='https://github.com/HalinaPP'>
                              @halinapp
@@ -27,4 +28,5 @@ export {
     DEATHS,
     RECOVERY,
     CASES,
+    FULL_SCREEN_IMG
 };

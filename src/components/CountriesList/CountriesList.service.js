@@ -1,10 +1,11 @@
 import { connectedCountryActions, store } from '@/redux/store';
 import { getCountriesInfo } from '@/services/Countries';
 import { CASES, DEATHS, RECOVERY, WORLD_ID, WORLD_NAME } from '@/constants/constants';
-import { createHtmlElement, getCasesColor } from '@/helpers/utils';
+import {countCountryRelativeOneHundred, createHtmlElement, getCasesColor} from '@/helpers/utils';
 import { WORLD_IMG_URL } from '@/components/Chart/constants';
-import { renderOnefilterElement } from '@/components/Filter/Filter.render';
+import {renderFilter, renderOnefilterElement} from '@/components/Filter/Filter.render';
 import { FILTERS } from '@/components/Filter/filter';
+import {ABSOLUTE, ALL_PERIOD, LAST_DAY, RELATIVE} from '@/services/filterTypes';
 
 async function getCountries() {
     const state = store.getState();
@@ -13,7 +14,17 @@ async function getCountries() {
     const countryResult = [];
     countries.forEach((country) => {
         if (country.id) {
-            const casesObj = country.allPeriod;
+            let casesObj;
+            switch (state.country.period) {
+                case ALL_PERIOD:
+                    casesObj = country.allPeriod;
+                    break;
+                case LAST_DAY:
+                    casesObj = country.lastDay;
+                    break;
+                default:
+                    break;
+            }
             let cases;
             switch (state.country.casesType) {
                 case CASES:
@@ -28,10 +39,21 @@ async function getCountries() {
                 default:
                     break;
             }
+            let resultCases;
+            switch (state.country.valueType) {
+                case ABSOLUTE:
+                    resultCases = cases;
+                    break;
+                case RELATIVE:
+                    resultCases = countCountryRelativeOneHundred(cases, country.population);
+                    break;
+                default:
+                    break;
+            }
             countryResult.push({
                 name: country.name,
                 flag: country.flag,
-                cases: cases,
+                cases: resultCases,
                 id: country.id
             });
         }
@@ -62,9 +84,8 @@ function renderCountryItem(country) {
 
 const setFilter = () => {
     const filterWrap = document.querySelector('.list--search-filter');
-    const cases = FILTERS.find((item) => item.name === 'CasesType');
     filterWrap.innerHTML = '';
-    filterWrap.appendChild(renderOnefilterElement(cases));
+    filterWrap.appendChild(renderFilter());
 };
 
 export const setCountries = async () => {

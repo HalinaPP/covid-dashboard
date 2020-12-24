@@ -14,7 +14,7 @@ export const getTableInfo = async () => {
 
 export const setTableInfo = async () => {
     const table = document.body.querySelector('.country-data-table');
-    const filter = document.body.querySelector('.filter');
+    const filter = table.querySelector('.filter');
     let wrapper = document.body.querySelector('.country-data-wrapper');
     if (wrapper) {
         wrapper.remove();

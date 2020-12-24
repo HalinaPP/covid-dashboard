@@ -8,12 +8,10 @@ import { store } from '@/redux/store';
 import { CASES, DEATHS, RECOVERY } from '@/constants/constants';
 import { ABSOLUTE, ALL_PERIOD, LAST_DAY, RELATIVE } from '@/services/filterTypes';
 import { getCountriesInfo } from '@/services/Countries';
-import { getCasesColor } from '@/helpers/utils';
+import {countCountryRelativeOneHundred, getCasesColor} from '@/helpers/utils';
 import { renderFilter } from '@/components/Filter/Filter.render';
 
-function countCountryRelativeOneHundred(casesValue, population) {
-    return Math.round((casesValue * 100000) / population);
-}
+
 
 export async function getChartInfo() {
     const state = store.getState();

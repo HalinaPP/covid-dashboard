@@ -56,3 +56,7 @@ export function getCasesColor() {
     }
     return null;
 }
+
+export function countCountryRelativeOneHundred(casesValue, population) {
+    return Math.round((casesValue * 100000) / population);
+}

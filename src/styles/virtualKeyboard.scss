@@ -3,8 +3,13 @@
     height:  2rem;
     position: absolute;
     left: 1rem;
+    top: 3.5rem;
     cursor:pointer
 }
+.list--search-filter.filter-wrapper{
+    padding-bottom:0.5rem;
+}
+
 .use-keyboard-input {
     display: block;
     width: 90%;

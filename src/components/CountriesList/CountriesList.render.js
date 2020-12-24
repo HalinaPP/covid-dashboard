@@ -22,7 +22,7 @@ const renderInfoContainer = (listEl) => {
     search.addEventListener('click', () => openKeyboard());
     search.addEventListener('keyup', () => doSearch());
 
-    filterBlock.append(search, keyboardIcon, filter);
+    filterBlock.append(filter, search, keyboardIcon );
 
     listEl.appendChild(filterBlock);
     return filterBlock;

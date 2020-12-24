@@ -22,11 +22,14 @@ export const handleFullScreenButton = (event) => {
 
 export const renderFullScreenButton = (parent) => {
     const fullscreen = parent.querySelector('.full-screen');
+    const className =
+        fullscreen && fullscreen.className !== '' ? fullscreen.className : 'full-screen';
+
     if (fullscreen) {
         fullscreen.remove();
     }
 
-    const fullscreenBtn = createHtmlElement('div', 'full-screen');
+    const fullscreenBtn = createHtmlElement('div', className);
     fullscreenBtn.innerHTML = FULL_SCREEN_IMG;
 
     return fullscreenBtn;

@@ -141,7 +141,8 @@ store.subscribe(async () => {
     }
 
     const mapWrapper = mapEl.parentElement;
-    const fullscreenBtn = renderFullScreenButton(mapWrapper, handleFullScreen);
+    const fullscreenBtn = renderFullScreenButton(mapWrapper);
+    fullscreenBtn.id = '.map-wrapper';
     fullscreenBtn.addEventListener('click', handleFullScreen);
     mapWrapper.appendChild(fullscreenBtn);
 

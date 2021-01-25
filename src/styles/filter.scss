@@ -1,0 +1,28 @@
+.filter-wrapper,
+.filter{
+    position:absolute;
+    right:1rem;
+    top:1rem;
+    z-index: 1000;
+    @include flex();
+    column-gap: 1rem;
+    font-size: 1.6rem;
+    select{
+        width:auto;
+        background: transparent;
+        @include border();
+        border-top-left-radius: 2px;
+        border-top-right-radius: 2px;
+        z-index: 3000;
+        cursor:pointer;
+    }
+}
+#map{
+    .filter{
+        select{
+            width: auto;
+            background: #fff;
+            @include border()
+        }
+    }
+}

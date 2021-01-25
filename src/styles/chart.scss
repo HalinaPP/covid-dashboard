@@ -1,0 +1,29 @@
+.chart-wrapper{
+  position:relative;
+  background: $primary-color-light;
+  flex: 0 0 auto;
+  margin: 1rem;
+  @include border;
+  @include shadow;
+  @include flex(column);
+
+}
+.chart--container {
+  height: auto;
+  width: 100%;
+}
+
+.chart--info{
+  display: block;
+  height: 30px;
+  width: 100%;
+
+  &-country{
+    padding:1rem;
+    font-weight:bold;
+  }
+}
+
+.zc-ref {
+  display: none;
+}

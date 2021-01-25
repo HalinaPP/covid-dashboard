@@ -1,0 +1,38 @@
+.country-data-table {
+    font-size:2rem;
+    position: relative;
+    @include border;
+    @include shadow;
+    @include flex(column, flex-start,flex-start);
+    background: $primary-color-light;
+    margin: 10px;
+    flex: 1 0 auto;
+
+    &-header {
+        @include flex(column,flex-start,flex-start);
+        column-gap: 1rem;
+        font-weight: bold;
+        row-gap: 0.5rem;
+
+    }
+    &-data {
+        @include flex();
+        column-gap: 1rem;
+        div {
+            width: 30%;
+        }
+    }
+    .country-data-wrapper{
+        margin: 2%;
+        margin-top: 0px;
+        @include flex(column,flex-start,flex-start);
+        row-gap: 1rem;
+        align-self: center;
+    }
+
+    .filter{
+        position: unset;
+        align-self: flex-end;
+        padding:1.5rem ;
+      }
+}

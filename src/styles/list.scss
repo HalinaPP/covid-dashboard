@@ -1,0 +1,91 @@
+.countries-list-wrapper{
+  position: relative ;
+  background: $primary-color-light;
+  padding: 5px;
+  @include border;
+  @include shadow;
+  @include flex(column);
+  flex: 0 0 auto;
+  margin: 1rem;
+  height: 30rem;
+  .filter{
+    position: unset;
+    align-self: flex-end;
+    padding:1.5rem 0;
+  }
+}
+.list--search-wrapper{
+  width: 100%;
+  @include flex(column,space-between, stretch);
+  height: 20%;
+  max-height: 57.5px;
+  flex: 0 0 auto;
+  margin-bottom: 5px;
+}
+
+.list--search-search{
+  @include flex(row,space-between, center);
+  flex: 1 0 auto;
+  @include border;
+  @include shadow;
+  height: 50%;
+  padding-left:3.5rem;
+  background: transparent;
+}
+.list--search-filter{
+  height: 50%;
+  position: static !important;
+  padding-left: 0.5rem;
+  @include flex(row,space-between, center);
+  flex: 0 0 auto;
+  margin-left: 5px;
+}
+.countries-list-container{
+  height: 70%;
+  overflow: auto;
+  @include border;
+  @include shadow;
+  @include flex(column,flex-start,center);
+  flex: 1 0 auto;
+  width: 100%;
+  display: flex;
+  margin-bottom: 0.5rem;
+}
+.countries-list{
+  width: 100%;
+  li{
+    padding-bottom: 0.5rem;
+    margin: 0.5rem;
+    border-bottom: solid 2px black;
+    div{
+      @include flex(row,start,center);
+      span{
+        margin-left: 0.5rem;
+      }
+      &:hover{
+        cursor: pointer;
+        background: $primary-color;
+      }
+    }
+  }
+  .active{
+    @include shadow();
+    background: $primary-color;
+    font-weight: bold;
+    border: none;
+    div{
+      &:hover{
+        cursor: default;
+        background: $primary-color;
+      }
+    }
+  }
+}
+
+.hidden{
+  display: none;
+}
+.countries-list-wrapper .filter{
+  padding: 0;
+}
+
